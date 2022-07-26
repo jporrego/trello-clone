@@ -8,13 +8,19 @@ import { RootState, AppThunk } from "../../app/store";
 import { Board } from "../../types";
 
 export interface BoardState {
-  boards: Board[];
-  status: "idle" | "loading" | "failed";
+  status: "idle" | "loading" | "failed" | "succeeded";
   error: string | undefined;
 }
 
-const initialState: BoardState = {
-  boards: [],
+const boardsAdapter = createEntityAdapter<Board>();
+
+const initialState = boardsAdapter.getInitialState({
+  status: "idle",
+  error: "",
+});
+
+const old_initialState: BoardState = {
+  //boards: [],
   status: "idle",
   error: "",
 };
@@ -38,20 +44,24 @@ export const boardsSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchBoards.fulfilled, (state, action) => {
-        state.boards = action.payload;
-        state.status = "idle";
+        //state.boards = action.payload;
+        boardsAdapter.upsertMany(state, action.payload);
+        state.status = "succeeded";
       })
       .addCase(fetchBoards.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message;
+        state.error = "action.error.message";
       });
   },
 });
 
-// The function below is called a selector and allows us to select a value from
-// the state. Selectors can also be defined inline where they're used instead of
-// in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
-export const selectBoards = (state: RootState) => state.boards.boards;
+// Export the customized selectors for this adapter using `getSelectors`
+export const {
+  selectAll: selectAllBoards,
+  selectById: selectBoardById,
+  selectIds: selectBoardIds,
+  // Pass in a selector that returns the posts slice of state
+} = boardsAdapter.getSelectors((state: RootState) => state.boards);
 
 export const selectBoardsStatus = (state: RootState) => state.boards.status;
 
