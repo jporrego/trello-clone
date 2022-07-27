@@ -1,4 +1,10 @@
 .boardPage {
-    background-color: red;
+    background-color: var(--grey-light);
     flex: 1;
+    padding: var(--padding-xl) var(--padding-m);
+}
+
+.title {
+    font-size: 1.8rem;
+    font-weight: 600;
 }
