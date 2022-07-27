@@ -1,0 +1,34 @@
+.boardList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--padding-m);
+    background-color: var(--grey-light);
+    padding: var(--padding-xl)var(--padding-m);
+}
+
+.boardListTitle {
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+    gap: 1.5rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.boardListTitle svg {
+    font-size: 2.5rem;
+
+}
+
+.boardCards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem 1rem;
+}
+
+.boardCard {
+    width: 14rem;
+    height: 9.6rem;
+    border-radius: var(--padding-s);
+    background-color: var(--grey);
+}
