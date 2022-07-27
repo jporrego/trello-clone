@@ -26,7 +26,7 @@ const BoardList = () => {
   const renderedBoards = boards.map((board) => (
     <div
       key={board.id}
-      className={styles.boardCard}
+      className={`${styles.boardCard} transition50ms`}
       onClick={() => navigate(`/boards/${board.id}`)}
     >
       <div>{board.name}</div>

@@ -36,4 +36,11 @@
     font-size: 1.6rem;
     font-weight: 600;
     color: var(--white);
+    cursor: pointer;
+}
+
+@media (pointer: fine) {
+    .boardCard:hover {
+        filter: brightness(.95);
+    }
 }
