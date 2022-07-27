@@ -3,21 +3,21 @@
     flex-direction: column;
     gap: var(--padding-m);
     background-color: var(--grey-light);
-    padding: var(--padding-xl)var(--padding-m);
+    padding: var(--padding-xl) var(--padding-m);
 }
 
 .boardListTitle {
     display: flex;
     align-items: center;
     padding-left: 1rem;
-    gap: 1.5rem;
-    font-weight: 600;
+    gap: 1rem;
+    font-size: 1.6rem;
+    font-weight: 700;
     color: var(--black);
 }
 
 .boardListTitle svg {
     font-size: 2.5rem;
-
 }
 
 .boardCards {
@@ -27,8 +27,13 @@
 }
 
 .boardCard {
+    display: flex;
+    padding: .5rem 1rem;
     width: 14rem;
     height: 9.6rem;
     border-radius: var(--padding-s);
     background-color: var(--grey);
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--white);
 }
