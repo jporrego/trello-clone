@@ -38,7 +38,7 @@ const Board = () => {
   return (
     <div className={styles.boardPage}>
       <div className={styles.title}>{board?.name}</div>
-      {renderedLists}
+      <div className={styles.lists}>{renderedLists}</div>
     </div>
   );
 };

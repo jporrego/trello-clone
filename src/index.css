@@ -2,14 +2,16 @@
 
 :root {
   --black: #1e2d49;
-  --white: #fafbfc;
+  --white: #fff;
+  --off-white: #fafbfc;
   --blue: #026aa7;
   --blue-dark: #014a75;
   --blue-light: #e4f0f6;
   --yellow: #F2A950;
   --red: #e4544a;
-  --grey: #606e85;
-  --grey-dark: #42526e;
+  --grey-darker: #455570;
+  --grey-dark: #606e85;
+  --grey: #ebecf0;
   --grey-light: #f0f2f5;
   --brown: #ab7d6e;
   --brown-dark: rgb(131, 56, 34);
