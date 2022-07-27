@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { List as ListType } from "../../types";
 import { Card as CardType } from "../../types";
 import styles from "./List.module.css";
-import { AiOutlinePlus } from "react-icons/ai";
+
 import Card from "../card/Card";
+import AddCard from "../card/add_card/AddCard";
 
 interface ListProps {
   list: ListType;
@@ -17,9 +18,7 @@ const List: React.FC<ListProps> = ({ list, cards }) => {
     <div className={styles.list}>
       <div className={styles.title}>{list.name}</div>
       {renderedCards}
-      <div className={styles.addBtn}>
-        <AiOutlinePlus></AiOutlinePlus> Add a card
-      </div>
+      <AddCard></AddCard>
     </div>
   );
 };
