@@ -47,3 +47,8 @@ body {
 .transition50ms {
   transition: all .05s ease-out
 }
+
+a, a:visited, a:active {
+  color: var(--white);
+  text-decoration: none;
+}

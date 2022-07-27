@@ -1,4 +1,7 @@
 .boardPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: rgb(74, 80, 107);
     flex: 1;
     padding: var(--padding-xl) var(--padding-m);

@@ -4,9 +4,17 @@
     height: 4.4rem;
     display: flex;
     align-items: center;
+    gap: 3rem;
+    font-size: 1.6rem;
+    font-weight: 300;
+    padding: 0rem var(--padding-m);
+    flex-shrink: 0;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
     gap: .5rem;
     font-size: 2rem;
     font-weight: 700;
-    padding: 0rem var(--padding-m);
-    flex-shrink: 0;
 }

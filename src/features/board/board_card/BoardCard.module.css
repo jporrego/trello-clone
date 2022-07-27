@@ -4,10 +4,10 @@
     width: 14rem;
     height: 9.6rem;
     border-radius: var(--padding-s);
-    background-color: var(--grey);
+    background-color: var(--grey-dark);
+    color: var(--white);
     font-size: 1.6rem;
     font-weight: 600;
-    color: var(--white);
     cursor: pointer;
 }
 
