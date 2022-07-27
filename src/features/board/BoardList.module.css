@@ -25,22 +25,3 @@
     grid-template-columns: 1fr 1fr;
     gap: 3rem 1rem;
 }
-
-.boardCard {
-    display: flex;
-    padding: .5rem 1rem;
-    width: 14rem;
-    height: 9.6rem;
-    border-radius: var(--padding-s);
-    background-color: var(--grey);
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--white);
-    cursor: pointer;
-}
-
-@media (pointer: fine) {
-    .boardCard:hover {
-        filter: brightness(.95);
-    }
-}

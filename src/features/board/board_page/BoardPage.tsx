@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useAppSelector, useAppDispatch } from "../../app/hooks";
-import { selectBoardById } from "../../features/board/boardsSlice";
-import { List } from "../../types";
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
+import { selectBoardById } from "../boardsSlice";
+import { List } from "../../../types";
+import styles from "./BoardPage.module.css";
 
 interface ParamTypes {
   boardId: string;
@@ -37,7 +38,20 @@ const Board = () => {
     );
   });
 
-  return <div>{renderedLists}</div>;
+  return (
+    <div className={styles.boardPage}>
+      {renderedLists}
+      {renderedLists}
+      {renderedLists}
+      {renderedLists}
+      {renderedLists}
+      {renderedLists}
+      {renderedLists}
+      {renderedLists}
+      {renderedLists}
+      {renderedLists}
+    </div>
+  );
 };
 
 export default Board;

@@ -9,6 +9,7 @@ import {
 
 import styles from "./BoardList.module.css";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
+import BoardCard from "./board_card/BoardCard";
 
 const BoardList = () => {
   const dispatch = useAppDispatch();
@@ -24,14 +25,7 @@ const BoardList = () => {
   }, [boardStatus]);
 
   const renderedBoards = boards.map((board) => (
-    <div
-      key={board.id}
-      className={`${styles.boardCard} transition50ms`}
-      onClick={() => navigate(`/boards/${board.id}`)}
-    >
-      <div>{board.name}</div>
-      <Link to={`/boards/${board.id}`}></Link>
-    </div>
+    <BoardCard board={board} key={board.id}></BoardCard>
   ));
 
   return (
