@@ -4,6 +4,7 @@ import styles from "../Card.module.css";
 
 const AddCard = () => {
   const [isFormVisible, setIsFormVisible] = useState(false);
+  const [cardName, setCardName] = useState<string>();
   const ref = useRef(null);
 
   useEffect(() => {
@@ -16,7 +17,9 @@ const AddCard = () => {
 
   const handleClickOutside = (e: MouseEvent) => {
     if (e.target instanceof Element) {
-      console.log(e.target.tagName);
+      if (e.target.tagName !== "TEXTAREA") {
+        setIsFormVisible(false);
+      }
     }
   };
 
@@ -24,7 +27,13 @@ const AddCard = () => {
     <div className={`${styles.addCard} transition50ms`}>
       {isFormVisible ? (
         <form action="">
-          <textarea name="" id=""></textarea>
+          <textarea
+            name="card-name"
+            id="card-name"
+            value={cardName}
+            onChange={(e) => setCardName(e.target.value)}
+            placeholder="Enter a title for this card..."
+          ></textarea>
           <div className={styles.addCard__btn}>Add Card</div>
         </form>
       ) : (

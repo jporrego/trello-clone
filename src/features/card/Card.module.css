@@ -1,9 +1,10 @@
 .card {
     min-height: 2rem;
     background-color: var(--white);
-    padding: var(--padding-m);
-    border-radius: var(--padding-s);
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, .2);
+    padding: var(--padding-s) var(--padding-m);
+    border-radius: var(--padding-xs);
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, .25);
+    font-size: 1.4rem;
 }
 
 .addCard {
@@ -17,6 +18,7 @@
 
 .addCard form {
     width: 100%;
+    font-size: 1.4rem;
 }
 
 .addCard textarea {
