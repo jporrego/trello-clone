@@ -18,7 +18,7 @@ const List: React.FC<ListProps> = ({ list, cards }) => {
     <div className={styles.list}>
       <div className={styles.title}>{list.name}</div>
       {renderedCards}
-      <AddCard></AddCard>
+      <AddCard listId={list.id}></AddCard>
     </div>
   );
 };

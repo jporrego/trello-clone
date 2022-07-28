@@ -3,7 +3,11 @@ import axios from "axios";
 import { AiOutlinePlus } from "react-icons/ai";
 import styles from "../Card.module.css";
 
-const AddCard = () => {
+interface AddCardProps {
+  listId: string;
+}
+
+const AddCard: React.FC<AddCardProps> = ({ listId }) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [cardName, setCardName] = useState<string>();
 
@@ -27,12 +31,21 @@ const AddCard = () => {
   }, [isFormVisible]);
 
   const handleAddCard = async () => {
-    try {
-      const url = process.env.REACT_APP_API_URL + `api/cards/${1}`;
-      const response = await axios.post(url);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+    if (cardName) {
+      try {
+        const url = process.env.REACT_APP_API_URL + `api/cards/`;
+        const data = {
+          list_id: listId,
+          cardName: cardName,
+          cardDescription: "",
+        };
+        const response = await axios.post(url, data);
+        setCardName("");
+        setIsFormVisible(false);
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
