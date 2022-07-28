@@ -37,7 +37,13 @@ export const fetchBoards = createAsyncThunk("boards/fetchBoards", async () => {
 export const boardsSlice = createSlice({
   name: "boards",
   initialState,
-  reducers: {},
+  reducers: {
+    cardAdded: (state, action) => {
+      const payload = action.payload;
+      boardsAdapter.addOne(state, payload);
+      console.log(payload);
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchBoards.pending, (state, action) => {
@@ -54,6 +60,8 @@ export const boardsSlice = createSlice({
       });
   },
 });
+
+export const { cardAdded } = boardsSlice.actions;
 
 // Export the customized selectors for this adapter using `getSelectors`
 export const {

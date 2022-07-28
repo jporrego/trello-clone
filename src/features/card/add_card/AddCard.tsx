@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useAppSelector, useAppDispatch } from "../../../app/hooks";
+import { cardAdded } from "../../board/boardsSlice";
 import { AiOutlinePlus } from "react-icons/ai";
 import styles from "../Card.module.css";
 
@@ -10,6 +12,7 @@ interface AddCardProps {
 const AddCard: React.FC<AddCardProps> = ({ listId }) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [cardName, setCardName] = useState<string>();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -40,9 +43,11 @@ const AddCard: React.FC<AddCardProps> = ({ listId }) => {
           cardDescription: "",
         };
         const response = await axios.post(url, data);
+        const newCard = response.data[0];
+        dispatch(cardAdded(newCard));
         setCardName("");
         setIsFormVisible(false);
-        console.log(response);
+        console.log(newCard);
       } catch (error) {
         console.log(error);
       }
