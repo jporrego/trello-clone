@@ -15,17 +15,6 @@
 
 }
 
-.addCard__btn {
-    display: flex;
-    align-items: center;
-    gap: .75rem;
-    line-height: 0px;
-    width: 100%;
-    padding: var(--padding-m);
-    border-radius: var(--padding-s);
-    background-color: var(--grey-light);
-}
-
 .addCard form {
     width: 100%;
 }
@@ -48,8 +37,28 @@
     box-shadow: 0px 1px 1px rgba(0, 0, 0, .2);
 }
 
+.addCard__btn {
+    width: fit-content;
+    color: var(--white);
+    background-color: var(--blue-light-1);
+    padding: var(--padding-s) var(--padding-m);
+    border-radius: var(--padding-xs);
+    margin-top: .5rem;
+}
+
+.showForm__btn {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    line-height: 0px;
+    width: 100%;
+    padding: var(--padding-m);
+    border-radius: var(--padding-s);
+    background-color: var(--grey-light);
+}
+
 @media (pointer: fine) {
-    .addCard__btn:hover {
+    .showForm__btn:hover {
         background-color: var(--grey);
     }
 }

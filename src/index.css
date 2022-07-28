@@ -4,9 +4,10 @@
   --black: #1e2d49;
   --white: #fff;
   --off-white: #fafbfc;
-  --blue: #026aa7;
   --blue-dark: #014a75;
-  --blue-light: #e4f0f6;
+  --blue: #026aa7;
+  --blue-light-1: #0079bf;
+  --blue-light-2: #e4f0f6;
   --yellow: #F2A950;
   --red: #e4544a;
   --grey-darker: #455570;
@@ -20,7 +21,7 @@
   /* Fonts */
   --font-primary: 'Noto Sans', sans-serif;
   /* Utilities */
-  --padding-xs: .2rem;
+  --padding-xs: .3rem;
   --padding-s: .5rem;
   --padding-m: 1rem;
   --padding-l: 2rem;
