@@ -14,16 +14,12 @@ interface ParamType {
   boardId: string;
 }
 
-interface dataType {
-  lists: ListType[];
-  cards: Card[];
-}
-
 const Board = () => {
   let boardId: string = useParams().boardId || "";
   const board = useAppSelector((state) => selectBoardById(state, boardId));
 
-  const [listsAndCards, setListsAndCards] = useState<dataType>();
+  const [lists, setLists] = useState<ListType[]>();
+
   useEffect(() => {
     fetchLists();
   }, []);
@@ -34,17 +30,14 @@ const Board = () => {
         process.env.REACT_APP_API_URL + `api/boards/${boardId}/lists`
       );
       const data = await response.json();
-      setListsAndCards(data);
+      setLists(data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const renderedLists = listsAndCards?.lists.map((list) => {
-    const listCards = listsAndCards.cards.filter(
-      (card) => card.list_id === list.id
-    );
-    return <List list={list} key={list.id} cards={listCards}></List>;
+  const renderedLists = lists?.map((list) => {
+    return <List list={list} key={list.id}></List>;
   });
 
   return (

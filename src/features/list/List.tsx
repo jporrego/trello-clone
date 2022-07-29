@@ -8,17 +8,34 @@ import AddCard from "../card/add_card/AddCard";
 
 interface ListProps {
   list: ListType;
-  cards: CardType[];
 }
-const List: React.FC<ListProps> = ({ list, cards }) => {
-  const renderedCards = cards.map((card) => {
+const List: React.FC<ListProps> = ({ list }) => {
+  const [cards, setCards] = useState<CardType[]>();
+
+  useEffect(() => {
+    fetchCards();
+  }, []);
+
+  const fetchCards = async () => {
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_API_URL + `api/lists/${list.id}/cards`
+      );
+      const data = await response.json();
+      setCards(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const renderedCards = cards?.map((card) => {
     return <Card key={card.id} card={card}></Card>;
   });
   return (
     <div className={styles.list}>
       <div className={styles.title}>{list.name}</div>
       {renderedCards}
-      <AddCard listId={list.id}></AddCard>
+      <AddCard listId={list.id} fetchCards={fetchCards}></AddCard>
     </div>
   );
 };
