@@ -1,0 +1,31 @@
+.addList {}
+
+.showFormBtn {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    line-height: 0;
+    font-size: 1.4rem;
+    background-color: rgba(255, 255, 255, .15);
+    color: white;
+    width: fit-content;
+    padding: var(--padding-m);
+    border-radius: var(--padding-xs);
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.075s ease-out;
+}
+
+.showFormBtn svg {
+    font-size: 1.6rem;
+}
+
+@media (pointer: fine) {
+    .addList:hover {
+        background-color: rgba(255, 255, 255, .2);
+    }
+
+    .addList:active {
+        background-color: rgba(255, 255, 255, .25);
+    }
+}

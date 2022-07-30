@@ -9,6 +9,7 @@ import { Card } from "../../../types";
 
 import List from "../../list/List";
 import styles from "./BoardPage.module.css";
+import AddList from "../add_list/AddList";
 
 interface ParamType {
   boardId: string;
@@ -42,7 +43,10 @@ const Board = () => {
 
   return (
     <div className={styles.boardPage}>
-      <div className={styles.title}>{board?.name}</div>
+      <div className={styles.boardPageTopSection}>
+        <div className={styles.title}>{board?.name}</div>
+        <AddList></AddList>
+      </div>
       <div className={styles.lists}>{renderedLists}</div>
     </div>
   );
