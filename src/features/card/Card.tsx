@@ -18,15 +18,12 @@ const Card: React.FC<CardProps> = ({ card }) => {
       onMouseEnter={() => setIsCardHovered(true)}
       onMouseLeave={() => setIsCardHovered(false)}
     >
-      {card.name}
-      <div className={styles.btnDeleteCard}>
-        {isCardHovered && (
-          <TiDeleteOutline
-            className={styles.btnDeleteCard}
-            onClick={handleDeleteCard}
-          ></TiDeleteOutline>
-        )}
-      </div>
+      <div className={styles.cardTitle}>{card.name}</div>
+      {isCardHovered && (
+        <div className={styles.btnDeleteCard}>
+          <TiDeleteOutline onClick={handleDeleteCard}></TiDeleteOutline>
+        </div>
+      )}
     </div>
   );
 };
