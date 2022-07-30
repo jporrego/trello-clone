@@ -45,9 +45,11 @@ const Board = () => {
     <div className={styles.boardPage}>
       <div className={styles.boardPageTopSection}>
         <div className={styles.title}>{board?.name}</div>
-        <AddList></AddList>
       </div>
-      <div className={styles.lists}>{renderedLists}</div>
+      <div className={styles.lists}>
+        {renderedLists}
+        <AddList boardId={boardId} fetchLists={fetchLists}></AddList>
+      </div>
     </div>
   );
 };

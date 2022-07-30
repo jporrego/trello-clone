@@ -3,7 +3,12 @@ import axios from "axios";
 import { AiOutlinePlus } from "react-icons/ai";
 import styles from "./AddList.module.css";
 
-const AddList = () => {
+interface AddListProps {
+  boardId: string;
+  fetchLists: () => void;
+}
+
+const AddList: React.FC<AddListProps> = ({ boardId, fetchLists }) => {
   const [listName, setListName] = useState("");
   const [isFormVisible, setIsFormVisible] = useState(false);
   const ref = useRef<HTMLInputElement | null>(null);
@@ -27,28 +32,25 @@ const AddList = () => {
   }, [isFormVisible]);
 
   const handleAddList = async () => {
-    /*
-    if (cardName.trim().length > 0) {
+    if (listName.trim().length > 0) {
       try {
         const url = process.env.REACT_APP_API_URL + `api/cards/`;
         const data = {
-          list_id: listId,
-          cardName: cardName,
-          cardDescription: "",
+          board_id: 1,
+          listName: listName,
         };
-        const response = await axios.post(url, data);
-        const newCard = response.data[0];
-        fetchCards();
-        setCardName("");
+        await axios.post(url, data);
+        fetchLists();
+        setListName("");
         setIsFormVisible(false);
-        console.log(newCard);
       } catch (error) {
         console.log(error);
       }
     } else {
       ref.current?.focus();
-    }*/
+    }
   };
+
   return (
     <div className={styles.addList} onClick={() => {}}>
       {isFormVisible ? (
