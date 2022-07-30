@@ -6,7 +6,7 @@ import styles from "./AddList.module.css";
 const AddList = () => {
   const [listName, setListName] = useState("");
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const ref = useRef<HTMLTextAreaElement | null>(null);
+  const ref = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -53,14 +53,15 @@ const AddList = () => {
     <div className={styles.addList} onClick={() => {}}>
       {isFormVisible ? (
         <form>
-          <textarea
+          <input
+            type="text"
             name="list-name"
             id="list-name"
             value={listName}
             onChange={(e) => setListName(e.target.value)}
-            placeholder="Enter a title for this list..."
+            placeholder="Enter list title..."
             ref={ref}
-          ></textarea>
+          ></input>
           <div
             id="addList__btn"
             className={styles.addList__btn}

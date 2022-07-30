@@ -1,6 +1,32 @@
-.addList {}
+.addList {
+    width: 27rem;
+    border-radius: var(--padding-xs);
+}
+
+.addList form {
+    width: 100%;
+    font-size: 1.4rem;
+}
+
+.addList input {
+    width: 100%;
+    height: 3.6rem;
+    padding: var(--padding-s);
+    border-radius: var(--padding-xs);
+    font-family: var(--font-primary);
+    color: var(--grey-darker);
+    border: none;
+    overflow: gr;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    resize: none;
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, .2);
+}
 
 .showFormBtn {
+    width: 100%;
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -8,7 +34,6 @@
     font-size: 1.4rem;
     background-color: rgba(255, 255, 255, .15);
     color: white;
-    width: fit-content;
     padding: var(--padding-m);
     border-radius: var(--padding-xs);
     cursor: pointer;
