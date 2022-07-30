@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import { useAppSelector, useAppDispatch } from "../../../app/hooks";
-import { cardAdded } from "../../board/boardsSlice";
 import { AiOutlinePlus } from "react-icons/ai";
 import styles from "../Card.module.css";
 
@@ -12,8 +10,8 @@ interface AddCardProps {
 
 const AddCard: React.FC<AddCardProps> = ({ listId, fetchCards }) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
-  const [cardName, setCardName] = useState<string>();
-  const dispatch = useAppDispatch();
+  const [cardName, setCardName] = useState<string>("");
+  const ref = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
@@ -35,7 +33,7 @@ const AddCard: React.FC<AddCardProps> = ({ listId, fetchCards }) => {
   }, [isFormVisible]);
 
   const handleAddCard = async () => {
-    if (cardName) {
+    if (cardName.trim().length > 0) {
       try {
         const url = process.env.REACT_APP_API_URL + `api/cards/`;
         const data = {
@@ -52,6 +50,8 @@ const AddCard: React.FC<AddCardProps> = ({ listId, fetchCards }) => {
       } catch (error) {
         console.log(error);
       }
+    } else {
+      ref.current?.focus();
     }
   };
 
@@ -65,6 +65,7 @@ const AddCard: React.FC<AddCardProps> = ({ listId, fetchCards }) => {
             value={cardName}
             onChange={(e) => setCardName(e.target.value)}
             placeholder="Enter a title for this card..."
+            ref={ref}
           ></textarea>
           <div
             id="addCard__btn"

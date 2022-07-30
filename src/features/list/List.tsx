@@ -29,7 +29,7 @@ const List: React.FC<ListProps> = ({ list }) => {
   };
 
   const renderedCards = cards?.map((card) => {
-    return <Card key={card.id} card={card}></Card>;
+    return <Card key={card.id} card={card} fetchCards={fetchCards}></Card>;
   });
   return (
     <div className={styles.list}>
