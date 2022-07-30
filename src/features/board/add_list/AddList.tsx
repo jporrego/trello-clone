@@ -34,9 +34,9 @@ const AddList: React.FC<AddListProps> = ({ boardId, fetchLists }) => {
   const handleAddList = async () => {
     if (listName.trim().length > 0) {
       try {
-        const url = process.env.REACT_APP_API_URL + `api/cards/`;
+        const url = process.env.REACT_APP_API_URL + `api/lists/`;
         const data = {
-          board_id: 1,
+          board_id: boardId,
           listName: listName,
         };
         await axios.post(url, data);
