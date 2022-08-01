@@ -69,7 +69,6 @@ const Board = () => {
 
       <div className={styles.lists}>
         <DndContext
-          sensors={sensors}
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
         >

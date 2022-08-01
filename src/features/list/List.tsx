@@ -4,6 +4,21 @@ import { Card as CardType } from "../../types";
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+  horizontalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
 import Card from "../card/Card";
 import AddCard from "../card/add_card/AddCard";
@@ -15,8 +30,21 @@ interface ListProps {
 }
 const List: React.FC<ListProps> = ({ list }) => {
   const [cards, setCards] = useState<CardType[]>();
-  const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: list.id });
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: list.id });
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   useEffect(() => {
     fetchCards();
@@ -35,7 +63,7 @@ const List: React.FC<ListProps> = ({ list }) => {
   };
 
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: CSS.Translate.toString(transform),
     transition,
   };
 
@@ -47,6 +75,7 @@ const List: React.FC<ListProps> = ({ list }) => {
     <div
       className={styles.list}
       ref={setNodeRef}
+      //@ts-ignore
       style={style}
       {...attributes}
       {...listeners}
