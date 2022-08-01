@@ -58,7 +58,7 @@ const Board = () => {
   };
 
   const renderedLists = lists.map((list) => {
-    return <List key={list.id} id={list.id} list={list} handle={true}></List>;
+    return <List key={list.id} id={list.id} list={list}></List>;
   });
 
   return (

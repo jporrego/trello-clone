@@ -27,7 +27,6 @@ import styles from "./List.module.css";
 interface ListProps {
   list: ListType;
   id: string;
-  handle: boolean;
 }
 const List: React.FC<ListProps> = ({ list }) => {
   const [cards, setCards] = useState<CardType[]>([]);
@@ -99,7 +98,6 @@ const List: React.FC<ListProps> = ({ list }) => {
 
   function handleDragEnd(event: { active: any; over: any }) {
     const { active, over } = event;
-    console.log(over);
     if (active.id !== over.id) {
       setCards((cards) => {
         const oldIndex = cards.findIndex((card) => card.id === active.id);

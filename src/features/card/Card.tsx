@@ -20,6 +20,7 @@ const Card: React.FC<CardProps> = ({ card, fetchCards }) => {
     useSortable({ id: card.id });
 
   const handleDeleteCard = async () => {
+    console.log(1);
     try {
       await axios.delete(
         `${process.env.REACT_APP_API_URL}api/cards/${card.id}`
@@ -38,12 +39,12 @@ const Card: React.FC<CardProps> = ({ card, fetchCards }) => {
       className={styles.card}
       onMouseEnter={() => setIsCardHovered(true)}
       onMouseLeave={() => setIsCardHovered(false)}
-      {...attributes}
-      {...listeners}
       style={style}
       ref={setNodeRef}
     >
-      <div className={styles.cardTitle}>{card.name}</div>
+      <div className={styles.cardTitle} {...listeners} {...attributes}>
+        {card.name}
+      </div>
       {isCardHovered && (
         <div className={styles.btnDeleteCard}>
           <TiDeleteOutline onClick={handleDeleteCard}></TiDeleteOutline>
