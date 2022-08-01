@@ -27,6 +27,7 @@ import styles from "./List.module.css";
 interface ListProps {
   list: ListType;
   id: string;
+  handle: boolean;
 }
 const List: React.FC<ListProps> = ({ list }) => {
   const [cards, setCards] = useState<CardType[]>();
@@ -38,13 +39,6 @@ const List: React.FC<ListProps> = ({ list }) => {
     transition,
     isDragging,
   } = useSortable({ id: list.id });
-
-  const sensors = useSensors(
-    useSensor(PointerSensor),
-    useSensor(KeyboardSensor, {
-      coordinateGetter: sortableKeyboardCoordinates,
-    })
-  );
 
   useEffect(() => {
     fetchCards();
@@ -77,10 +71,10 @@ const List: React.FC<ListProps> = ({ list }) => {
       ref={setNodeRef}
       //@ts-ignore
       style={style}
-      {...attributes}
-      {...listeners}
     >
-      <div className={styles.title}>{list.name}</div>
+      <div className={styles.title} {...listeners} {...attributes}>
+        {list.name}
+      </div>
       {renderedCards}
       <AddCard listId={list.id} fetchCards={fetchCards}></AddCard>
     </div>

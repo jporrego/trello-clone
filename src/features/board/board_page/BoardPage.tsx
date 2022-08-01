@@ -58,7 +58,7 @@ const Board = () => {
   };
 
   const renderedLists = lists.map((list) => {
-    return <List key={list.id} id={list.id} list={list}></List>;
+    return <List key={list.id} id={list.id} list={list} handle={true}></List>;
   });
 
   return (
@@ -69,6 +69,7 @@ const Board = () => {
 
       <div className={styles.lists}>
         <DndContext
+          sensors={sensors}
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}
         >
@@ -77,7 +78,7 @@ const Board = () => {
             strategy={horizontalListSortingStrategy}
           >
             {lists.map((list) => (
-              <List key={list.id} id={list.id} list={list} />
+              <List key={list.id} id={list.id} list={list} handle={true} />
             ))}
           </SortableContext>
         </DndContext>
