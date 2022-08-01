@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
+
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
 import { Card as CardType } from "../../types";
 import styles from "./Card.module.css";
 import { TiDeleteOutline } from "react-icons/ti";
@@ -12,6 +16,9 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({ card, fetchCards }) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
 
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: card.id });
+
   const handleDeleteCard = async () => {
     try {
       await axios.delete(
@@ -21,11 +28,20 @@ const Card: React.FC<CardProps> = ({ card, fetchCards }) => {
     } catch (error) {}
   };
 
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+  };
+
   return (
     <div
       className={styles.card}
       onMouseEnter={() => setIsCardHovered(true)}
       onMouseLeave={() => setIsCardHovered(false)}
+      {...attributes}
+      {...listeners}
+      style={style}
+      ref={setNodeRef}
     >
       <div className={styles.cardTitle}>{card.name}</div>
       {isCardHovered && (

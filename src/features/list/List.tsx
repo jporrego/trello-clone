@@ -30,7 +30,7 @@ interface ListProps {
   handle: boolean;
 }
 const List: React.FC<ListProps> = ({ list }) => {
-  const [cards, setCards] = useState<CardType[]>();
+  const [cards, setCards] = useState<CardType[]>([]);
   const {
     attributes,
     listeners,
@@ -39,6 +39,13 @@ const List: React.FC<ListProps> = ({ list }) => {
     transition,
     isDragging,
   } = useSortable({ id: list.id });
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
 
   useEffect(() => {
     fetchCards();
@@ -75,10 +82,32 @@ const List: React.FC<ListProps> = ({ list }) => {
       <div className={styles.title} {...listeners} {...attributes}>
         {list.name}
       </div>
-      {renderedCards}
+      <div className={styles.cards}>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext items={cards} strategy={verticalListSortingStrategy}>
+            {renderedCards}
+          </SortableContext>
+        </DndContext>
+      </div>
       <AddCard listId={list.id} fetchCards={fetchCards}></AddCard>
     </div>
   );
+
+  function handleDragEnd(event: { active: any; over: any }) {
+    const { active, over } = event;
+    console.log(over);
+    if (active.id !== over.id) {
+      setCards((cards) => {
+        const oldIndex = cards.findIndex((card) => card.id === active.id);
+        const newIndex = cards.findIndex((card) => card.id === over.id);
+        return arrayMove(cards, oldIndex, newIndex);
+      });
+    }
+  }
 };
 
 export default List;

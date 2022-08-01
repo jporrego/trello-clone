@@ -77,9 +77,7 @@ const Board = () => {
             items={lists}
             strategy={horizontalListSortingStrategy}
           >
-            {lists.map((list) => (
-              <List key={list.id} id={list.id} list={list} handle={true} />
-            ))}
+            {renderedLists}
           </SortableContext>
         </DndContext>
         <AddList boardId={boardId} fetchLists={fetchLists}></AddList>
