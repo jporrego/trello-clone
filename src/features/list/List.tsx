@@ -31,6 +31,8 @@ interface ListProps {
 }
 const List: React.FC<ListProps> = ({ list }) => {
   const [cards, setCards] = useState<CardType[]>([]);
+  const [cardsOrder, setCardsOrder] = useState<number[]>([]);
+
   const {
     attributes,
     listeners,
@@ -49,11 +51,12 @@ const List: React.FC<ListProps> = ({ list }) => {
 
   useEffect(() => {
     fetchCards();
+    fetchCardsOrder();
   }, []);
 
   useEffect(() => {
     updateCardOrder();
-  }, [cards]);
+  }, [cardsOrder]);
 
   const fetchCards = async () => {
     try {
@@ -62,13 +65,28 @@ const List: React.FC<ListProps> = ({ list }) => {
       );
       const data = await response.json();
       setCards(data);
+      /*
       console.log(list);
       //@ts-ignore
       const cardsById = data.cards_order.map((id) =>
         //@ts-ignore
         data.find((c) => c.id === id)
       );
-      setCards(cardsById);
+      setCards(cardsById);*/
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchCardsOrder = async () => {
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_API_URL + `api/lists/${list.id}/cards/order`
+      );
+
+      const data = await response.json();
+      console.log(data);
+      setCardsOrder(data);
     } catch (error) {
       console.log(error);
     }
@@ -78,9 +96,8 @@ const List: React.FC<ListProps> = ({ list }) => {
     try {
       const url =
         process.env.REACT_APP_API_URL + `api/lists/${list.id}/cards/order`;
-      const newCardOrder = cards.map((c) => c.id);
       const data = {
-        card_order: newCardOrder,
+        card_order: cardsOrder,
       };
       await axios.put(url, data);
     } catch (error) {
@@ -130,6 +147,12 @@ const List: React.FC<ListProps> = ({ list }) => {
         const oldIndex = cards.findIndex((card) => card.id === active.id);
         const newIndex = cards.findIndex((card) => card.id === over.id);
         const newArray = arrayMove(cards, oldIndex, newIndex);
+        return newArray;
+      });
+      setCardsOrder((cards) => {
+        const oldIndex = cardsOrder.findIndex((id) => id === active.id);
+        const newIndex = cardsOrder.findIndex((id) => id === over.id);
+        const newArray = arrayMove(cardsOrder, oldIndex, newIndex);
         return newArray;
       });
     }
