@@ -28,8 +28,9 @@ import styles from "./List.module.css";
 interface ListProps {
   list: ListType;
   id: string;
+  setSelectedCard: React.Dispatch<React.SetStateAction<CardType | undefined>>;
 }
-const List: React.FC<ListProps> = ({ list }) => {
+const List: React.FC<ListProps> = ({ list, setSelectedCard }) => {
   const [cards, setCards] = useState<CardType[]>([]);
   const [cardsOrder, setCardsOrder] = useState<number[]>([]);
 
@@ -53,10 +54,6 @@ const List: React.FC<ListProps> = ({ list }) => {
     fetchCards();
     fetchCardsOrder();
   }, []);
-
-  useEffect(() => {
-    //updateCardOrder();
-  }, [cardsOrder]);
 
   const fetchCards = async () => {
     try {
@@ -107,7 +104,14 @@ const List: React.FC<ListProps> = ({ list }) => {
   };
 
   const renderedCards = cards?.map((card) => {
-    return <Card key={card.id} card={card} fetchCards={fetchCards}></Card>;
+    return (
+      <Card
+        key={card.id}
+        card={card}
+        fetchCards={fetchCards}
+        setSelectedCard={setSelectedCard}
+      ></Card>
+    );
   });
 
   return (
@@ -152,13 +156,6 @@ const List: React.FC<ListProps> = ({ list }) => {
       const newIndex = cardsOrder.findIndex((id) => id === over.id);
       const newArray = arrayMove(cardsOrder, oldIndex, newIndex);
       updateCardOrder(newArray);
-      /*
-      setCardsOrder(() => {
-        const oldIndex = cardsOrder.findIndex((id) => id === active.id);
-        const newIndex = cardsOrder.findIndex((id) => id === over.id);
-        const newArray = arrayMove(cardsOrder, oldIndex, newIndex);
-        return newArray;
-      });*/
     }
   }
 };

@@ -6,21 +6,23 @@ import { CSS } from "@dnd-kit/utilities";
 
 import { Card as CardType } from "../../types";
 import styles from "./Card.module.css";
-import { TiDeleteOutline } from "react-icons/ti";
+import { FiEdit3 } from "react-icons/fi";
 
 interface CardProps {
   card: CardType;
   fetchCards: () => void;
+  setSelectedCard: React.Dispatch<React.SetStateAction<CardType | undefined>>;
 }
 
-const Card: React.FC<CardProps> = ({ card, fetchCards }) => {
+const Card: React.FC<CardProps> = ({ card, fetchCards, setSelectedCard }) => {
   const [isCardHovered, setIsCardHovered] = useState(false);
 
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: card.id });
 
   const handleDeleteCard = async () => {
-    console.log(1);
+    setSelectedCard(card);
+    return;
     try {
       await axios.delete(
         `${process.env.REACT_APP_API_URL}api/cards/${card.id}`
@@ -47,7 +49,7 @@ const Card: React.FC<CardProps> = ({ card, fetchCards }) => {
       </div>
       {isCardHovered && (
         <div className={styles.btnDeleteCard}>
-          <TiDeleteOutline onClick={handleDeleteCard}></TiDeleteOutline>
+          <FiEdit3 onClick={handleDeleteCard}></FiEdit3>
         </div>
       )}
     </div>

@@ -21,9 +21,11 @@ import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { selectBoardById } from "../boardsSlice";
 
 import { List as ListType } from "../../../types";
+import { Card } from "../../../types";
 import List from "../../list/List";
 import AddList from "../add_list/AddList";
 import styles from "./BoardPage.module.css";
+import CardModal from "../../card/card_modal/CardModal";
 
 interface ParamType {
   boardId: string;
@@ -33,6 +35,7 @@ const Board = () => {
   let boardId: string = useParams().boardId || "";
   const board = useAppSelector((state) => selectBoardById(state, boardId));
   const [lists, setLists] = useState<ListType[]>([]);
+  const [selectedCard, setSelectedCard] = useState<Card>();
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -58,7 +61,14 @@ const Board = () => {
   };
 
   const renderedLists = lists.map((list) => {
-    return <List key={list.id} id={list.id} list={list}></List>;
+    return (
+      <List
+        key={list.id}
+        id={list.id}
+        list={list}
+        setSelectedCard={setSelectedCard}
+      ></List>
+    );
   });
 
   return (
@@ -82,6 +92,12 @@ const Board = () => {
         </DndContext>
         <AddList boardId={boardId} fetchLists={fetchLists}></AddList>
       </div>
+      {selectedCard && (
+        <CardModal
+          card={selectedCard}
+          setSelectedCard={setSelectedCard}
+        ></CardModal>
+      )}
     </div>
   );
 
