@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { List as ListType } from "../../types";
 import { Card as CardType } from "../../types";
+import axios from "axios";
 
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -50,6 +51,10 @@ const List: React.FC<ListProps> = ({ list }) => {
     fetchCards();
   }, []);
 
+  useEffect(() => {
+    updateCardOrder();
+  }, [cards]);
+
   const fetchCards = async () => {
     try {
       const response = await fetch(
@@ -57,6 +62,27 @@ const List: React.FC<ListProps> = ({ list }) => {
       );
       const data = await response.json();
       setCards(data);
+      console.log(list);
+      //@ts-ignore
+      const cardsById = data.cards_order.map((id) =>
+        //@ts-ignore
+        data.find((c) => c.id === id)
+      );
+      setCards(cardsById);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateCardOrder = async () => {
+    try {
+      const url =
+        process.env.REACT_APP_API_URL + `api/lists/${list.id}/cards/order`;
+      const newCardOrder = cards.map((c) => c.id);
+      const data = {
+        card_order: newCardOrder,
+      };
+      await axios.put(url, data);
     } catch (error) {
       console.log(error);
     }
@@ -65,6 +91,7 @@ const List: React.FC<ListProps> = ({ list }) => {
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
+    zIndex: isDragging && 100,
   };
 
   const renderedCards = cards?.map((card) => {
@@ -102,7 +129,8 @@ const List: React.FC<ListProps> = ({ list }) => {
       setCards((cards) => {
         const oldIndex = cards.findIndex((card) => card.id === active.id);
         const newIndex = cards.findIndex((card) => card.id === over.id);
-        return arrayMove(cards, oldIndex, newIndex);
+        const newArray = arrayMove(cards, oldIndex, newIndex);
+        return newArray;
       });
     }
   }
