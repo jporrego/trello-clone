@@ -55,7 +55,7 @@ const List: React.FC<ListProps> = ({ list }) => {
   }, []);
 
   useEffect(() => {
-    updateCardOrder();
+    //updateCardOrder();
   }, [cardsOrder]);
 
   const fetchCards = async () => {
@@ -65,14 +65,6 @@ const List: React.FC<ListProps> = ({ list }) => {
       );
       const data = await response.json();
       setCards(data);
-      /*
-      console.log(list);
-      //@ts-ignore
-      const cardsById = data.cards_order.map((id) =>
-        //@ts-ignore
-        data.find((c) => c.id === id)
-      );
-      setCards(cardsById);*/
     } catch (error) {
       console.log(error);
     }
@@ -92,14 +84,19 @@ const List: React.FC<ListProps> = ({ list }) => {
     }
   };
 
-  const updateCardOrder = async () => {
+  const updateCardOrder = async (newCardOrder: number[]) => {
     try {
       const url =
         process.env.REACT_APP_API_URL + `api/lists/${list.id}/cards/order`;
       const data = {
-        card_order: cardsOrder,
+        card_order: newCardOrder,
       };
-      await axios.put(url, data);
+      const response = await axios.put(url, data);
+      if (response.status === 200) {
+        fetchCards();
+        fetchCardsOrder();
+      }
+      console.log(response.status);
     } catch (error) {
       console.log(error);
     }
@@ -149,12 +146,17 @@ const List: React.FC<ListProps> = ({ list }) => {
         const newArray = arrayMove(cards, oldIndex, newIndex);
         return newArray;
       });
-      setCardsOrder((cards) => {
+      const oldIndex = cardsOrder.findIndex((id) => id === active.id);
+      const newIndex = cardsOrder.findIndex((id) => id === over.id);
+      const newArray = arrayMove(cardsOrder, oldIndex, newIndex);
+      updateCardOrder(newArray);
+      /*
+      setCardsOrder(() => {
         const oldIndex = cardsOrder.findIndex((id) => id === active.id);
         const newIndex = cardsOrder.findIndex((id) => id === over.id);
         const newArray = arrayMove(cardsOrder, oldIndex, newIndex);
         return newArray;
-      });
+      });*/
     }
   }
 };
