@@ -6,9 +6,14 @@ import styles from "../Card.module.css";
 interface AddCardProps {
   listId: string;
   fetchCards: () => void;
+  fetchCardsOrder: () => void;
 }
 
-const AddCard: React.FC<AddCardProps> = ({ listId, fetchCards }) => {
+const AddCard: React.FC<AddCardProps> = ({
+  listId,
+  fetchCards,
+  fetchCardsOrder,
+}) => {
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [cardName, setCardName] = useState<string>("");
   const ref = useRef<HTMLTextAreaElement | null>(null);
@@ -44,6 +49,7 @@ const AddCard: React.FC<AddCardProps> = ({ listId, fetchCards }) => {
         const response = await axios.post(url, data);
         const newCard = response.data[0];
         fetchCards();
+        fetchCardsOrder();
         setCardName("");
         setIsFormVisible(false);
         console.log(newCard);

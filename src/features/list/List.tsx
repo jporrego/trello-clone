@@ -77,7 +77,6 @@ const List: React.FC<ListProps> = ({ list }) => {
       );
 
       const data = await response.json();
-      console.log(data);
       setCardsOrder(data);
     } catch (error) {
       console.log(error);
@@ -96,7 +95,6 @@ const List: React.FC<ListProps> = ({ list }) => {
         fetchCards();
         fetchCardsOrder();
       }
-      console.log(response.status);
     } catch (error) {
       console.log(error);
     }
@@ -133,7 +131,11 @@ const List: React.FC<ListProps> = ({ list }) => {
           </SortableContext>
         </DndContext>
       </div>
-      <AddCard listId={list.id} fetchCards={fetchCards}></AddCard>
+      <AddCard
+        listId={list.id}
+        fetchCards={fetchCards}
+        fetchCardsOrder={fetchCardsOrder}
+      ></AddCard>
     </div>
   );
 
