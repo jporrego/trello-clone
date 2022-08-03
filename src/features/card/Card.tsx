@@ -22,6 +22,7 @@ const Card: React.FC<CardProps> = ({ card, fetchCards, setSelectedCard }) => {
 
   const handleDeleteCard = async () => {
     setSelectedCard(card);
+
     return;
     try {
       await axios.delete(

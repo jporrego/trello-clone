@@ -101,6 +101,7 @@ const List: React.FC<ListProps> = ({ list, setSelectedCard }) => {
     transform: CSS.Translate.toString(transform),
     transition,
     zIndex: isDragging && 100,
+    boxShadow: isDragging && "0px 2px 4px rgba(0,0,0,.35)",
   };
 
   const renderedCards = cards?.map((card) => {

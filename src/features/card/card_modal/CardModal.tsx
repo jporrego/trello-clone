@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card } from "../../../types";
 import { BiBookContent } from "react-icons/bi";
 import styles from "./CardModal.module.css";
@@ -9,12 +9,18 @@ interface CardModal {
 }
 
 const CardModal: React.FC<CardModal> = ({ card, setSelectedCard }) => {
+  useEffect(() => {
+    if (card) {
+      document.body.classList.add("modalOpen");
+    }
+  }, [card]);
   const handleCloseModal = (
     e: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
     if (e.target instanceof Element) {
       if (e.target.id === "CardModal") {
         setSelectedCard(undefined);
+        document.body.classList.remove("modalOpen");
       }
     }
   };
