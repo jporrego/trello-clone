@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Menu, Button, Text, createStyles } from "@mantine/core";
 import {
   Settings,
@@ -25,12 +26,35 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-function ListPopover() {
+interface ListPopoverProps {
+  setShowListMenu: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const ListPopover: React.FC<ListPopoverProps> = ({ setShowListMenu }) => {
+  const [opened, setOpened] = useState(false);
   const { classes } = useStyles();
+
+  useEffect(() => {
+    if (opened) {
+      setShowListMenu(true);
+    } else {
+      setShowListMenu(false);
+    }
+  }, [opened]);
+
   return (
-    <Menu shadow="md" width={200} transition="fade" classNames={classes}>
+    <Menu
+      shadow="md"
+      width={200}
+      classNames={classes}
+      position="bottom-start"
+      opened={opened}
+      onChange={setOpened}
+    >
       <Menu.Target>
-        <Button>...</Button>
+        <Button variant="subtle" compact>
+          ...
+        </Button>
       </Menu.Target>
 
       <Menu.Dropdown>
@@ -60,6 +84,6 @@ function ListPopover() {
       </Menu.Dropdown>
     </Menu>
   );
-}
+};
 
 export default ListPopover;

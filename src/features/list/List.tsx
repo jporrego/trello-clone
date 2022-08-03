@@ -121,6 +121,7 @@ const List: React.FC<ListProps> = ({ list, setSelectedCard }) => {
   return (
     <div
       className={styles.list}
+      id={showListMenu ? styles.list : undefined}
       ref={setNodeRef}
       //@ts-ignore
       style={style}
@@ -129,7 +130,7 @@ const List: React.FC<ListProps> = ({ list, setSelectedCard }) => {
         <div className={styles.title} {...listeners} {...attributes}>
           {list.name}
         </div>
-        <ListPopover></ListPopover>
+        <ListPopover setShowListMenu={setShowListMenu}></ListPopover>
         {/*
         <div
           className={styles.btnListMenu}
@@ -154,7 +155,7 @@ const List: React.FC<ListProps> = ({ list, setSelectedCard }) => {
         fetchCards={fetchCards}
         fetchCardsOrder={fetchCardsOrder}
       ></AddCard>
-      {showListMenu && 1}
+      {showListMenu && ""}
     </div>
   );
 
