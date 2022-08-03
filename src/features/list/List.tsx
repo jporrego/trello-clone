@@ -23,6 +23,7 @@ import {
 
 import Card from "../card/Card";
 import AddCard from "../card/add_card/AddCard";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
 import styles from "./List.module.css";
 
 interface ListProps {
@@ -122,8 +123,13 @@ const List: React.FC<ListProps> = ({ list, setSelectedCard }) => {
       //@ts-ignore
       style={style}
     >
-      <div className={styles.title} {...listeners} {...attributes}>
-        {list.name}
+      <div className={styles.header}>
+        <div className={styles.title} {...listeners} {...attributes}>
+          {list.name}
+        </div>
+        <div className={styles.btnListMenu}>
+          <BiDotsHorizontalRounded></BiDotsHorizontalRounded>
+        </div>
       </div>
       <div className={styles.cards}>
         <DndContext

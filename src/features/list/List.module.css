@@ -13,13 +13,29 @@
 
 }
 
-.title {
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 1.4rem;
     font-weight: 600;
     padding: var(--padding-m);
     border-radius: var(--padding-s);
     cursor: pointer;
     transition: all 0.1s ease-out;
+}
+
+.title {
+    width: 100%;
+    height: fit-content;
+}
+
+.btnListMenu {
+    font-size: 1.6rem;
+    display: flex;
+    align-items: center;
+    padding: var(--padding-xs);
+    border-radius: var(--padding-xs);
 }
 
 .cards {
@@ -30,7 +46,11 @@
 }
 
 @media (pointer: fine) {
-    .title:hover {
+    .header:hover {
         background-color: var(--grey);
+    }
+
+    .btnListMenu:hover {
+        background-color: var(--grey-light-1);
     }
 }
