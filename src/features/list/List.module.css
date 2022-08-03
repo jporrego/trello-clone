@@ -38,6 +38,16 @@
     border-radius: var(--padding-xs);
 }
 
+.listMenu {
+    position: absolute;
+    width: 10rem;
+    height: 10rem;
+    background-color: red;
+    top: 4rem;
+    right: -7rem;
+    z-index: 20;
+}
+
 .cards {
     display: flex;
     flex-direction: column;

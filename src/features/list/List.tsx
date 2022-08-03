@@ -25,6 +25,7 @@ import Card from "../card/Card";
 import AddCard from "../card/add_card/AddCard";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import styles from "./List.module.css";
+import ListPopover from "./ListPopover/ListPopover";
 
 interface ListProps {
   list: ListType;
@@ -34,6 +35,7 @@ interface ListProps {
 const List: React.FC<ListProps> = ({ list, setSelectedCard }) => {
   const [cards, setCards] = useState<CardType[]>([]);
   const [cardsOrder, setCardsOrder] = useState<number[]>([]);
+  const [showListMenu, setShowListMenu] = useState<boolean>(false);
 
   const {
     attributes,
@@ -127,9 +129,14 @@ const List: React.FC<ListProps> = ({ list, setSelectedCard }) => {
         <div className={styles.title} {...listeners} {...attributes}>
           {list.name}
         </div>
-        <div className={styles.btnListMenu}>
+        <ListPopover></ListPopover>
+        {/*
+        <div
+          className={styles.btnListMenu}
+          onClick={() => setShowListMenu(true)}
+        >
           <BiDotsHorizontalRounded></BiDotsHorizontalRounded>
-        </div>
+  </div>*/}
       </div>
       <div className={styles.cards}>
         <DndContext
@@ -147,6 +154,7 @@ const List: React.FC<ListProps> = ({ list, setSelectedCard }) => {
         fetchCards={fetchCards}
         fetchCardsOrder={fetchCardsOrder}
       ></AddCard>
+      {showListMenu && 1}
     </div>
   );
 
