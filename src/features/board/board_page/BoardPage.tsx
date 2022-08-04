@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 import {
   DndContext,
@@ -35,6 +36,7 @@ const Board = () => {
   let boardId: string = useParams().boardId || "";
   const board = useAppSelector((state) => selectBoardById(state, boardId));
   const [lists, setLists] = useState<ListType[]>([]);
+  const [listsOrder, setlistsOrder] = useState<number[]>([]);
   const [selectedCard, setSelectedCard] = useState<Card>();
 
   const sensors = useSensors(
@@ -46,6 +48,7 @@ const Board = () => {
 
   useEffect(() => {
     fetchLists();
+    fetchListsOrder();
   }, []);
 
   const fetchLists = async () => {
@@ -55,6 +58,36 @@ const Board = () => {
       );
       const data = await response.json();
       setLists(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchListsOrder = async () => {
+    try {
+      const response = await fetch(
+        process.env.REACT_APP_API_URL + `api/boards/${boardId}/lists/order`
+      );
+
+      const data = await response.json();
+      setlistsOrder(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const updateListOrder = async (newListOrder: number[]) => {
+    try {
+      const url =
+        process.env.REACT_APP_API_URL + `api/boards/${boardId}/lists/order`;
+      const data = {
+        list_order: newListOrder,
+      };
+      const response = await axios.put(url, data);
+      if (response.status === 200) {
+        fetchLists();
+        fetchListsOrder();
+      }
     } catch (error) {
       console.log(error);
     }
@@ -112,6 +145,10 @@ const Board = () => {
         console.log(oldIndex, newIndex);
         return arrayMove(lists, oldIndex, newIndex);
       });
+      const oldIndex = listsOrder.findIndex((id) => id === active.id);
+      const newIndex = listsOrder.findIndex((id) => id === over.id);
+      const newArray = arrayMove(listsOrder, oldIndex, newIndex);
+      updateListOrder(newArray);
     }
   }
 };
