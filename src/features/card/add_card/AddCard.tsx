@@ -46,13 +46,11 @@ const AddCard: React.FC<AddCardProps> = ({
           cardName: cardName,
           cardDescription: "",
         };
-        const response = await axios.post(url, data);
-        const newCard = response.data[0];
-        fetchCards();
-        fetchCardsOrder();
+        await axios.post(url, data);
+        await fetchCards();
+        await fetchCardsOrder();
         setCardName("");
         setIsFormVisible(false);
-        console.log(newCard);
       } catch (error) {
         console.log(error);
       }
@@ -84,7 +82,9 @@ const AddCard: React.FC<AddCardProps> = ({
       ) : (
         <div
           className={styles.showForm__btn}
-          onClick={() => setIsFormVisible(true)}
+          onClick={() => {
+            setIsFormVisible(true);
+          }}
         >
           <AiOutlinePlus></AiOutlinePlus> Add a card
         </div>

@@ -26,17 +26,18 @@ import AddCard from "../card/add_card/AddCard";
 import { BiDotsHorizontalRounded } from "react-icons/bi";
 import styles from "./List.module.css";
 import ListPopover from "./ListPopover/ListPopover";
+import CardModal from "../card/card_modal/CardModal";
 
 interface ListProps {
   list: ListType;
   id: string;
-  setSelectedCard: React.Dispatch<React.SetStateAction<CardType | undefined>>;
   fetchlists: () => Promise<void>;
 }
-const List: React.FC<ListProps> = ({ list, setSelectedCard, fetchlists }) => {
+const List: React.FC<ListProps> = ({ list, fetchlists }) => {
   const [cards, setCards] = useState<CardType[]>([]);
   const [cardsOrder, setCardsOrder] = useState<number[]>([]);
   const [showListMenu, setShowListMenu] = useState<boolean>(false);
+  const [selectedCard, setSelectedCard] = useState<CardType>();
 
   const {
     attributes,
@@ -119,6 +120,14 @@ const List: React.FC<ListProps> = ({ list, setSelectedCard, fetchlists }) => {
     boxShadow: isDragging && "0px 2px 4px rgba(0,0,0,.35)",
   };
 
+  const zIndexStyle = () => {
+    if (showListMenu || selectedCard) {
+      return styles.list;
+    } else {
+      return undefined;
+    }
+  };
+
   const renderedCards = cards?.map((card) => {
     return (
       <Card
@@ -133,7 +142,7 @@ const List: React.FC<ListProps> = ({ list, setSelectedCard, fetchlists }) => {
   return (
     <div
       className={styles.list}
-      id={showListMenu ? styles.list : undefined}
+      id={zIndexStyle()}
       ref={setNodeRef}
       //@ts-ignore
       style={style}
@@ -170,7 +179,14 @@ const List: React.FC<ListProps> = ({ list, setSelectedCard, fetchlists }) => {
         fetchCards={fetchCards}
         fetchCardsOrder={fetchCardsOrder}
       ></AddCard>
-      {showListMenu && ""}
+      {selectedCard && (
+        <CardModal
+          card={selectedCard}
+          setSelectedCard={setSelectedCard}
+          fetchCards={fetchCards}
+          fetchCardsOrder={fetchCardsOrder}
+        ></CardModal>
+      )}
     </div>
   );
 

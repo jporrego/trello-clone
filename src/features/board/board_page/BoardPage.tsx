@@ -37,7 +37,8 @@ const Board = () => {
   const board = useAppSelector((state) => selectBoardById(state, boardId));
   const [lists, setLists] = useState<ListType[]>([]);
   const [listsOrder, setlistsOrder] = useState<number[]>([]);
-  const [selectedCard, setSelectedCard] = useState<Card>();
+  // OLD. DELETE IF NO PROBLEMS
+  //const [selectedCard, setSelectedCard] = useState<Card>();
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -99,7 +100,7 @@ const Board = () => {
         key={list.id}
         id={list.id}
         list={list}
-        setSelectedCard={setSelectedCard}
+        //setSelectedCard={setSelectedCard}
         fetchlists={fetchLists}
       ></List>
     );
@@ -130,12 +131,12 @@ const Board = () => {
           fetchListsOrder={fetchListsOrder}
         ></AddList>
       </div>
-      {selectedCard && (
+      {/*selectedCard && (
         <CardModal
           card={selectedCard}
           setSelectedCard={setSelectedCard}
         ></CardModal>
-      )}
+      )*/}
     </div>
   );
 
