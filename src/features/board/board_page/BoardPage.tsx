@@ -67,6 +67,7 @@ const Board = () => {
         id={list.id}
         list={list}
         setSelectedCard={setSelectedCard}
+        fetchlists={fetchLists}
       ></List>
     );
   });

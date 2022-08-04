@@ -8,6 +8,7 @@ import {
   Trash,
   ArrowsLeftRight,
 } from "tabler-icons-react";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
 
 const useStyles = createStyles((theme) => ({
   item: {
@@ -28,9 +29,13 @@ const useStyles = createStyles((theme) => ({
 
 interface ListPopoverProps {
   setShowListMenu: React.Dispatch<React.SetStateAction<boolean>>;
+  handleDeleteList: () => Promise<void>;
 }
 
-const ListPopover: React.FC<ListPopoverProps> = ({ setShowListMenu }) => {
+const ListPopover: React.FC<ListPopoverProps> = ({
+  setShowListMenu,
+  handleDeleteList,
+}) => {
   const [opened, setOpened] = useState(false);
   const { classes } = useStyles();
 
@@ -53,12 +58,21 @@ const ListPopover: React.FC<ListPopoverProps> = ({ setShowListMenu }) => {
     >
       <Menu.Target>
         <Button variant="subtle" compact>
-          ...
+          <BiDotsHorizontalRounded></BiDotsHorizontalRounded>
         </Button>
       </Menu.Target>
 
       <Menu.Dropdown>
         <Menu.Label>List actions</Menu.Label>
+        <Menu.Divider />
+        <Menu.Item
+          color="red"
+          icon={<Trash size={14} />}
+          onClick={() => handleDeleteList()}
+        >
+          Delete list
+        </Menu.Item>
+        {/*
         <Menu.Item icon={<Settings size={14} />}>Settings</Menu.Item>
         <Menu.Item icon={<MessageCircle size={14} />}>Messages</Menu.Item>
         <Menu.Item icon={<Photo size={14} />}>Gallery</Menu.Item>
@@ -72,7 +86,9 @@ const ListPopover: React.FC<ListPopoverProps> = ({ setShowListMenu }) => {
         >
           Search
         </Menu.Item>
+
         <Menu.Divider />
+
         <Menu.Label>Danger zone</Menu.Label>
         <Menu.Item icon={<ArrowsLeftRight size={14} />}>
           Transfer my data
@@ -80,7 +96,7 @@ const ListPopover: React.FC<ListPopoverProps> = ({ setShowListMenu }) => {
 
         <Menu.Item color="red" icon={<Trash size={14} />}>
           Delete my account
-        </Menu.Item>
+        </Menu.Item>*/}
       </Menu.Dropdown>
     </Menu>
   );

@@ -31,8 +31,9 @@ interface ListProps {
   list: ListType;
   id: string;
   setSelectedCard: React.Dispatch<React.SetStateAction<CardType | undefined>>;
+  fetchlists: () => Promise<void>;
 }
-const List: React.FC<ListProps> = ({ list, setSelectedCard }) => {
+const List: React.FC<ListProps> = ({ list, setSelectedCard, fetchlists }) => {
   const [cards, setCards] = useState<CardType[]>([]);
   const [cardsOrder, setCardsOrder] = useState<number[]>([]);
   const [showListMenu, setShowListMenu] = useState<boolean>(false);
@@ -100,6 +101,17 @@ const List: React.FC<ListProps> = ({ list, setSelectedCard }) => {
     }
   };
 
+  const handleDeleteList = async () => {
+    try {
+      await axios.delete(
+        `${process.env.REACT_APP_API_URL}api/lists/${list.id}`
+      );
+      fetchlists();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const style = {
     transform: CSS.Translate.toString(transform),
     transition,
@@ -130,7 +142,10 @@ const List: React.FC<ListProps> = ({ list, setSelectedCard }) => {
         <div className={styles.title} {...listeners} {...attributes}>
           {list.name}
         </div>
-        <ListPopover setShowListMenu={setShowListMenu}></ListPopover>
+        <ListPopover
+          setShowListMenu={setShowListMenu}
+          handleDeleteList={handleDeleteList}
+        ></ListPopover>
         {/*
         <div
           className={styles.btnListMenu}
