@@ -1,12 +1,14 @@
 import React, { useEffect } from "react";
 import axios from "axios";
 import { Card } from "../../../types";
+import { List } from "../../../types";
 import { BiBookContent } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
 import styles from "./CardModal.module.css";
 
 interface CardModal {
   card?: Card;
+  list: List;
   setSelectedCard: React.Dispatch<React.SetStateAction<Card | undefined>>;
   fetchCards: () => void;
   fetchCardsOrder: () => void;
@@ -14,6 +16,7 @@ interface CardModal {
 
 const CardModal: React.FC<CardModal> = ({
   card,
+  list,
   setSelectedCard,
   fetchCards,
   fetchCardsOrder,
@@ -57,8 +60,13 @@ const CardModal: React.FC<CardModal> = ({
         {/* CONTENT */}
         <div className={styles.card__content}>
           <div className={styles.title}>
-            {" "}
-            <BiBookContent></BiBookContent> {card?.name}
+            <div className={styles.title__logo}>
+              <BiBookContent></BiBookContent>
+            </div>
+            <div className={styles.title__cardName}>{card?.name}</div>
+            <div className={styles.title__listName}>
+              in list <u>{list.name}</u>
+            </div>
           </div>
         </div>
 

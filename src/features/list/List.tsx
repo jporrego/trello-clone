@@ -182,6 +182,7 @@ const List: React.FC<ListProps> = ({ list, fetchlists }) => {
       {selectedCard && (
         <CardModal
           card={selectedCard}
+          list={list}
           setSelectedCard={setSelectedCard}
           fetchCards={fetchCards}
           fetchCardsOrder={fetchCardsOrder}
