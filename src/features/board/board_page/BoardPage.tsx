@@ -124,7 +124,11 @@ const Board = () => {
             {renderedLists}
           </SortableContext>
         </DndContext>
-        <AddList boardId={boardId} fetchLists={fetchLists}></AddList>
+        <AddList
+          boardId={boardId}
+          fetchLists={fetchLists}
+          fetchListsOrder={fetchListsOrder}
+        ></AddList>
       </div>
       {selectedCard && (
         <CardModal

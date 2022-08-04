@@ -6,9 +6,14 @@ import styles from "./AddList.module.css";
 interface AddListProps {
   boardId: string;
   fetchLists: () => void;
+  fetchListsOrder: () => void;
 }
 
-const AddList: React.FC<AddListProps> = ({ boardId, fetchLists }) => {
+const AddList: React.FC<AddListProps> = ({
+  boardId,
+  fetchLists,
+  fetchListsOrder,
+}) => {
   const [listName, setListName] = useState("");
   const [isFormVisible, setIsFormVisible] = useState(false);
   const ref = useRef<HTMLInputElement | null>(null);
@@ -40,7 +45,8 @@ const AddList: React.FC<AddListProps> = ({ boardId, fetchLists }) => {
           listName: listName,
         };
         await axios.post(url, data);
-        fetchLists();
+        await fetchLists();
+        await fetchListsOrder();
         setListName("");
         setIsFormVisible(false);
       } catch (error) {
