@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { Card } from "../../../types";
 import { BiBookContent } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
 import styles from "./CardModal.module.css";
 
 interface CardModal {
@@ -48,18 +49,27 @@ const CardModal: React.FC<CardModal> = ({
   };
   return (
     <div
-      className={styles.CardModal}
+      className={styles.cardModal}
       id="CardModal"
       onClick={(e) => handleCloseModal(e)}
     >
-      <div className={styles.Card}>
-        <div className={styles.title}>
-          {" "}
-          <BiBookContent></BiBookContent> {card?.name}
+      <div className={styles.card}>
+        {/* CONTENT */}
+        <div className={styles.card__content}>
+          <div className={styles.title}>
+            {" "}
+            <BiBookContent></BiBookContent> {card?.name}
+          </div>
         </div>
 
-        <div className={styles.cardDeleteBtn}>
-          <div onClick={() => handleDeleteCard()}>1</div>
+        {/* MENU */}
+        <div className={styles.card__menu}>
+          <div
+            className={styles.card__menu__btn}
+            onClick={() => handleDeleteCard()}
+          >
+            <MdDelete></MdDelete> delete
+          </div>
         </div>
       </div>
     </div>

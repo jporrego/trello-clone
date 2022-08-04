@@ -1,4 +1,4 @@
-.CardModal {
+.cardModal {
     position: absolute;
     top: 0;
     left: 0;
@@ -10,12 +10,42 @@
     overflow: auto;
 }
 
-.Card {
-    background-color: var(--grey-light-1);
+.card {
+    display: grid;
+    grid-template-columns: 80% 1fr;
+    grid-template-rows: 1fr;
+    gap: var(--padding-m);
+    background-color: var(--grey-light-2);
     max-width: 70rem;
     flex: 1;
     height: 80rem;
     margin: 0 auto;
     border-radius: var(--padding-xs);
-    padding: var(--padding-xl) var(--padding-xl);
+    padding: var(--padding-l) var(--padding-l);
+}
+
+.card__content {}
+
+.card__menu {}
+
+.card__menu__btn {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    text-transform: capitalize;
+    background-color: var(--grey-light-1);
+    border-radius: var(--padding-xs);
+    padding: var(--padding-m);
+    font-size: 1.4rem;
+    font-weight: 500;
+    line-height: 0;
+    user-select: none;
+    cursor: pointer;
+    transition: all .1s ease-out;
+}
+
+@media (pointer: fine) {
+    .card__menu__btn:hover {
+        background-color: var(--grey);
+    }
 }
