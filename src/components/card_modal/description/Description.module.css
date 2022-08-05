@@ -33,6 +33,7 @@
     margin-top: 1.5rem;
     background-color: var(--white);
     resize: none;
+    font-family: var(--font-primary);
 }
 
 .description_textArea:focus {
@@ -42,4 +43,5 @@
 
 .description_textArea::placeholder {
     color: var(--grey-dark);
+    font-family: var(--font-primary);
 }
