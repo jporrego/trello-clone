@@ -21,6 +21,20 @@
     font-weight: 600;
 }
 
+.btnShowTextarea {
+    width: 100%;
+    height: 5rem;
+    font-size: 1.4rem;
+    color: var(--grey-darker);
+    padding: 1rem 1rem;
+    font-size: 1.3rem;
+    border-radius: var(--padding-xs);
+    margin-top: 1.5rem;
+    background-color: var(--grey-light-1);
+    resize: none;
+    font-family: var(--font-primary);
+}
+
 .description_textArea {
     width: 100%;
     min-height: 10rem;
