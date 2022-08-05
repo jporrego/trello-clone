@@ -4,7 +4,10 @@ import { Card } from "../../../types";
 import { List } from "../../../types";
 import { BiBookContent } from "react-icons/bi";
 import { MdDelete } from "react-icons/md";
+import { MdOutlineDescription } from "react-icons/md";
+
 import styles from "./CardModal.module.css";
+import Description from "../../../components/card_modal/description/Description";
 
 interface CardModal {
   card?: Card;
@@ -59,15 +62,18 @@ const CardModal: React.FC<CardModal> = ({
       <div className={styles.card}>
         {/* CONTENT */}
         <div className={styles.card__content}>
-          <div className={styles.title}>
-            <div className={styles.title__logo}>
+          {/* TITLE */}
+          <div className={styles.content_section}>
+            <div className={styles.content_section_logo}>
               <BiBookContent></BiBookContent>
             </div>
-            <div className={styles.title__cardName}>{card?.name}</div>
-            <div className={styles.title__listName}>
+            <div className={styles.title_cardName}>{card?.name}</div>
+            <div className={styles.title_listName}>
               in list <u>{list.name}</u>
             </div>
           </div>
+          {/* DESCRIPTION */}
+          <Description></Description>
         </div>
 
         {/* MENU */}
