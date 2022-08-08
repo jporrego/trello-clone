@@ -74,7 +74,7 @@ const CardModal: React.FC<CardModal> = ({
             </div>
           </div>
           {/* DESCRIPTION */}
-          <Description card={card}></Description>
+          <Description card={card} fetchCards={fetchCards}></Description>
         </div>
 
         {/* MENU */}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { Card } from "../../../types";
 
@@ -8,15 +8,16 @@ import { MdOutlineDescription } from "react-icons/md";
 
 interface DescriptionProps {
   card?: Card;
+  fetchCards: () => void;
 }
-const Description: React.FC<DescriptionProps> = ({ card }) => {
+const Description: React.FC<DescriptionProps> = ({ card, fetchCards }) => {
   const [description, setDescription] = useState<string>();
   const [newDescription, setNewDescription] = useState<string>();
   const [showForm, setShowForm] = useState<boolean>(false);
+  const ref = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
-      console.log(1);
       if (e.target instanceof Element) {
         if (
           e.target.id !== "description" &&
@@ -42,6 +43,12 @@ const Description: React.FC<DescriptionProps> = ({ card }) => {
     setNewDescription(card?.description);
   }, []);
 
+  useEffect(() => {
+    if (showForm) {
+      ref.current?.focus();
+    }
+  }, [showForm]);
+
   const handleSubmitDescription = async () => {
     if (newDescription !== undefined && card) {
       try {
@@ -51,6 +58,7 @@ const Description: React.FC<DescriptionProps> = ({ card }) => {
         if (response.status === 200) {
           setDescription(newDescription.trim());
           setNewDescription(newDescription.trim());
+          fetchCards();
           setShowForm(false);
         }
       } catch (error) {
@@ -79,6 +87,7 @@ const Description: React.FC<DescriptionProps> = ({ card }) => {
               maxLength={850}
               value={newDescription}
               onChange={(e) => setNewDescription(e.target.value)}
+              ref={ref}
             ></textarea>
             <div className={styles.form_btns}>
               {" "}
@@ -103,7 +112,10 @@ const Description: React.FC<DescriptionProps> = ({ card }) => {
             {description ? (
               <div
                 className={styles.description__text}
-                onClick={() => setShowForm(true)}
+                onClick={() => {
+                  setShowForm(true);
+                  ref.current?.focus();
+                }}
               >
                 {description}
               </div>
