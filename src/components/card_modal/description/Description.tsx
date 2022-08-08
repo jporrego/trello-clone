@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { handleShowForm } from "../../../app/helpers/helpers";
+import axios from "axios";
+import { Card } from "../../../types";
 
 import styles from "./Description.module.css";
 import cardModalStyles from "../../../features/card/card_modal/CardModal.module.css";
 import { MdOutlineDescription } from "react-icons/md";
 
-const Description = () => {
-  const [description, setDescription] = useState<string>("");
+interface DescriptionProps {
+  card?: Card;
+}
+const Description: React.FC<DescriptionProps> = ({ card }) => {
+  const [description, setDescription] = useState<string>();
+  const [newDescription, setNewDescription] = useState<string>();
   const [showForm, setShowForm] = useState<boolean>(false);
 
   useEffect(() => {
@@ -32,12 +37,29 @@ const Description = () => {
     };
   }, [showForm]);
 
-  const handleSubmitDescription = () => {
-    if (description !== "") {
+  useEffect(() => {
+    setDescription(card?.description);
+    setNewDescription(card?.description);
+  }, []);
+
+  const handleSubmitDescription = async () => {
+    if (newDescription !== undefined && card) {
+      try {
+        const url = `${process.env.REACT_APP_API_URL}api/cards/${card.id}/description`;
+        const data = { cardId: card.id, description: newDescription.trim() };
+        const response = await axios.put(url, data);
+        if (response.status === 200) {
+          setDescription(newDescription.trim());
+          setNewDescription(newDescription.trim());
+          setShowForm(false);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
   const handleCancelDescription = () => {
-    setDescription("");
+    setNewDescription("");
     setShowForm(false);
   };
 
@@ -55,8 +77,8 @@ const Description = () => {
               className={styles.description_textArea}
               placeholder="Add a more detailed description..."
               maxLength={850}
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              value={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
             ></textarea>
             <div className={styles.form_btns}>
               {" "}
@@ -77,11 +99,22 @@ const Description = () => {
             </div>
           </form>
         ) : (
-          <div
-            className={styles.btnShowTextarea}
-            onClick={() => setShowForm(true)}
-          >
-            Add a more detailed description...
+          <div>
+            {description ? (
+              <div
+                className={styles.description__text}
+                onClick={() => setShowForm(true)}
+              >
+                {description}
+              </div>
+            ) : (
+              <div
+                className={styles.btnShowTextarea}
+                onClick={() => setShowForm(true)}
+              >
+                Add a more detailed description...
+              </div>
+            )}
           </div>
         )}
       </div>

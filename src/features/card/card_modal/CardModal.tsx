@@ -53,6 +53,7 @@ const CardModal: React.FC<CardModal> = ({
       } catch (error) {}
     }
   };
+
   return (
     <div
       className={styles.cardModal}
@@ -73,7 +74,7 @@ const CardModal: React.FC<CardModal> = ({
             </div>
           </div>
           {/* DESCRIPTION */}
-          <Description></Description>
+          <Description card={card}></Description>
         </div>
 
         {/* MENU */}
