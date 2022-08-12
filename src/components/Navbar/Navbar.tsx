@@ -11,6 +11,7 @@ const Navbar = () => {
         Trello
       </div>
       <Link to={"/"}>Boards</Link>
+      <Link to={"/login"}>Login</Link>
     </div>
   );
 };

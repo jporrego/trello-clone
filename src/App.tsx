@@ -5,6 +5,7 @@ import "./App.css";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./components/pages/Home";
 import BoardPage from "./features/board/board_page/BoardPage";
+import Login from "./features/login/Login";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Navbar></Navbar>
           <Routes>
             <Route path="/" element={<Home></Home>} />
+            <Route path="/login" element={<Login></Login>} />
             <Route path="/boards/:boardId" element={<BoardPage></BoardPage>} />
           </Routes>
         </div>
