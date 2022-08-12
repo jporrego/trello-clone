@@ -1,3 +1,8 @@
+export interface User {
+  name: string;
+  email: string;
+}
+
 export interface Board {
   id: string;
   name: string;
