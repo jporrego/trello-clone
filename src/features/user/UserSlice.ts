@@ -15,7 +15,7 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-  user: { name: "", email: "" },
+  user: { name: null, email: null },
   status: "idle",
   error: "",
 };
@@ -44,7 +44,7 @@ export const userSlice = createSlice({
       state.user.name = action.payload.name;
       state.user.email = action.payload.email;
     },
-    logoutUser: (state, action) => {
+    logoutUser: (state) => {
       state.user.name = null;
       state.user.email = null;
     },

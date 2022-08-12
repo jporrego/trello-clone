@@ -8,17 +8,36 @@ const Login = () => {
   const dispatch = useAppDispatch();
 
   const user = useAppSelector(selectUser);
-  const userObject = user.user;
 
-  const handleSignIn = () => {};
+  const handleSignIn = async () => {
+    const signInResult = await auth.signInWithPopup(provider);
 
-  const handleSignOut = () => {};
+    if (signInResult !== null) {
+      dispatch(
+        setActiveUser({
+          //@ts-ignore
+          name: signInResult.additionalUserInfo?.profile?.given_name,
+          //@ts-ignore
+          email: signInResult.additionalUserInfo?.profile.email,
+        })
+      );
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+      dispatch(logoutUser());
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
       Login{" "}
-      {userObject ? (
-        <button onClick={() => dispatch(handleSignOut)}>Sign out</button>
+      {user.user.name ? (
+        <button onClick={handleSignOut}>Sign out</button>
       ) : (
         <button onClick={() => dispatch(handleSignIn)}>Sign in</button>
       )}
