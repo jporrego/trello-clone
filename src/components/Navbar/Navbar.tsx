@@ -1,7 +1,8 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import styles from "./Navbar.module.css";
+import ProfileIcon from "../profile/ProfileIcon";
 import { FaTrello } from "react-icons/fa";
+import styles from "./Navbar.module.css";
 
 const Navbar = () => {
   return (
@@ -10,8 +11,11 @@ const Navbar = () => {
         <FaTrello></FaTrello>
         Trello
       </div>
-      <Link to={"/"}>Boards</Link>
-      <Link to={"/login"}>Login</Link>
+      <div className={styles.links}>
+        <Link to={"/"}>Boards</Link>
+        <Link to={"/login"}>Login</Link>
+      </div>
+      <ProfileIcon></ProfileIcon>
     </div>
   );
 };

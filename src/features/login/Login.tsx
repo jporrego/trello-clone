@@ -19,6 +19,8 @@ const Login = () => {
           name: signInResult.additionalUserInfo?.profile?.given_name,
           //@ts-ignore
           email: signInResult.additionalUserInfo?.profile.email,
+          //@ts-ignore
+          picture: signInResult.additionalUserInfo?.profile.picture,
         })
       );
     }
@@ -36,7 +38,7 @@ const Login = () => {
   return (
     <div>
       Login{" "}
-      {user.user.name ? (
+      {user.name ? (
         <button onClick={handleSignOut}>Sign out</button>
       ) : (
         <button onClick={() => dispatch(handleSignIn)}>Sign in</button>

@@ -15,7 +15,7 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-  user: { name: null, email: null },
+  user: { name: null, email: null, picture: null },
   status: "idle",
   error: "",
 };
@@ -43,10 +43,12 @@ export const userSlice = createSlice({
     setActiveUser: (state, action) => {
       state.user.name = action.payload.name;
       state.user.email = action.payload.email;
+      state.user.picture = action.payload.picture;
     },
     logoutUser: (state) => {
       state.user.name = null;
       state.user.email = null;
+      state.user.picture = null;
     },
   },
   extraReducers(builder) {
@@ -67,7 +69,7 @@ export const userSlice = createSlice({
 
 export const { setActiveUser, logoutUser } = userSlice.actions;
 
-export const selectUser = (state: RootState) => state.user;
+export const selectUser = (state: RootState) => state.user.user;
 export const selectUserStatus = (state: RootState) => state.user.status;
 
 export default userSlice.reducer;
