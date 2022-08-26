@@ -1,35 +1,44 @@
 import React from "react";
-import { auth, provider } from "../../firebase";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { useNavigate } from "react-router-dom";
 
+import { auth, provider } from "../../firebase";
 import { setActiveUser, logoutUser, selectUser } from "../user/UserSlice";
 
 const Login = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const user = useAppSelector(selectUser);
 
   const handleSignIn = async () => {
-    const signInResult = await auth.signInWithPopup(provider);
+    try {
+      const signInResult = await (await auth.signInWithPopup(provider)).user;
+      const token = await signInResult?.getIdToken();
+      console.log(token);
 
-    if (signInResult !== null) {
-      dispatch(
-        setActiveUser({
-          //@ts-ignore
-          name: signInResult.additionalUserInfo?.profile?.given_name,
-          //@ts-ignore
-          email: signInResult.additionalUserInfo?.profile.email,
-          //@ts-ignore
-          picture: signInResult.additionalUserInfo?.profile.picture,
-        })
-      );
-    }
+      if (signInResult !== null) {
+        dispatch(
+          setActiveUser({
+            //@ts-ignore
+            name: signInResult.displayName,
+            //@ts-ignore
+            email: signInResult.email,
+            //@ts-ignore
+            picture: signInResult.photoURL,
+          })
+        );
+      }
+      token && sessionStorage.setItem("authToken", token);
+      navigate("/");
+    } catch (error) {}
   };
 
   const handleSignOut = async () => {
     try {
       await auth.signOut();
       dispatch(logoutUser());
+      sessionStorage.removeItem("authToken");
     } catch (error) {
       console.log(error);
     }
