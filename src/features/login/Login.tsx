@@ -15,7 +15,6 @@ const Login = () => {
     try {
       const signInResult = await (await auth.signInWithPopup(provider)).user;
       const token = await signInResult?.getIdToken();
-      console.log(token);
 
       if (signInResult !== null) {
         dispatch(
@@ -29,7 +28,7 @@ const Login = () => {
           })
         );
       }
-      token && sessionStorage.setItem("authToken", token);
+      token && localStorage.setItem("authToken", token);
       navigate("/");
     } catch (error) {}
   };
@@ -38,7 +37,7 @@ const Login = () => {
     try {
       await auth.signOut();
       dispatch(logoutUser());
-      sessionStorage.removeItem("authToken");
+      localStorage.removeItem("authToken");
     } catch (error) {
       console.log(error);
     }

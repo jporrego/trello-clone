@@ -6,10 +6,9 @@ const Home = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const authToken = sessionStorage.getItem("authToken");
-
+    const authToken = localStorage.getItem("authToken");
     if (authToken) {
-      navigate("/home");
+      navigate("/");
     }
 
     if (!authToken) {
