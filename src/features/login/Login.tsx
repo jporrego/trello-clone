@@ -14,11 +14,12 @@ const Login = () => {
   const handleSignIn = async () => {
     try {
       const signInResult = await (await auth.signInWithPopup(provider)).user;
-      const token = await signInResult?.getIdToken();
 
       if (signInResult !== null) {
         dispatch(
           setActiveUser({
+            //@ts-ignore
+            id: signInResult.uid,
             //@ts-ignore
             name: signInResult.displayName,
             //@ts-ignore
@@ -28,7 +29,6 @@ const Login = () => {
           })
         );
       }
-      //token && localStorage.setItem("authToken", token);
       navigate("/");
     } catch (error) {}
   };

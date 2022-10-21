@@ -15,7 +15,7 @@ export interface UserState {
 }
 
 const initialState: UserState = {
-  user: { name: null, email: null, picture: null },
+  user: { id: null, name: null, email: null, picture: null },
   status: "idle",
   error: "",
 };
@@ -41,11 +41,13 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setActiveUser: (state, action) => {
+      state.user.id = action.payload.id;
       state.user.name = action.payload.name;
       state.user.email = action.payload.email;
       state.user.picture = action.payload.picture;
     },
     logoutUser: (state) => {
+      state.user.id = null;
       state.user.name = null;
       state.user.email = null;
       state.user.picture = null;

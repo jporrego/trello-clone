@@ -20,6 +20,8 @@ import {
 
 import { useAppSelector, useAppDispatch } from "../../../app/hooks";
 import { selectBoardById } from "../boardsSlice";
+import { selectUser } from "../../user/UserSlice";
+import { useNavigate } from "react-router-dom";
 
 import { List as ListType } from "../../../types";
 import { Card } from "../../../types";
@@ -33,12 +35,12 @@ interface ParamType {
 }
 
 const Board = () => {
+  const user = useAppSelector(selectUser);
   let boardId: string = useParams().boardId || "";
   const board = useAppSelector((state) => selectBoardById(state, boardId));
   const [lists, setLists] = useState<ListType[]>([]);
   const [listsOrder, setlistsOrder] = useState<number[]>([]);
-  // OLD. DELETE IF NO PROBLEMS
-  //const [selectedCard, setSelectedCard] = useState<Card>();
+  const navigate = useNavigate();
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -50,6 +52,12 @@ const Board = () => {
   useEffect(() => {
     fetchLists();
     fetchListsOrder();
+  }, []);
+
+  useEffect(() => {
+    if (user.id === null) {
+      navigate("/login");
+    }
   }, []);
 
   const fetchLists = async () => {

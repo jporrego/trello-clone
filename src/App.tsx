@@ -6,6 +6,7 @@ import { setActiveUser } from "./features/user/UserSlice";
 import { auth, provider } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import "./App.css";
+
 import Navbar from "./components/navbar/Navbar";
 import Home from "./components/pages/Home";
 import BoardPage from "./features/board/board_page/BoardPage";
@@ -19,6 +20,8 @@ function App() {
       if (currentUser) {
         dispatch(
           setActiveUser({
+            //@ts-ignore
+            id: currentUser.uid,
             //@ts-ignore
             name: currentUser.displayName,
             //@ts-ignore
