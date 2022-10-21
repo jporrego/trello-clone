@@ -28,7 +28,7 @@ const Login = () => {
           })
         );
       }
-      token && localStorage.setItem("authToken", token);
+      //token && localStorage.setItem("authToken", token);
       navigate("/");
     } catch (error) {}
   };

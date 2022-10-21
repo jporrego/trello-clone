@@ -4,6 +4,7 @@ import { MantineProvider, Text } from "@mantine/core";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
 import { setActiveUser } from "./features/user/UserSlice";
 import { auth, provider } from "./firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import "./App.css";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./components/pages/Home";
@@ -14,19 +15,24 @@ function App() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    /*
-      dispatch(
-        setActiveUser({
-          //@ts-ignore
-          name: signInResult.displayName,
-          //@ts-ignore
-          email: signInResult.email,
-          //@ts-ignore
-          picture: signInResult.photoURL,
-        })
-      );
-    token && localStorage.setItem("authToken", token);*/
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        dispatch(
+          setActiveUser({
+            //@ts-ignore
+            name: currentUser.displayName,
+            //@ts-ignore
+            email: currentUser.email,
+            //@ts-ignore
+            picture: currentUser.photoURL,
+          })
+        );
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
   }, []);
   return (
     <MantineProvider withGlobalStyles withNormalizeCSS>
