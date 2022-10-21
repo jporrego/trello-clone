@@ -1,14 +1,14 @@
 .navbar {
     background-color: var(--blue);
     color: var(--white);
-    height: 4.4rem;
+    height: 4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 3rem;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     font-weight: 300;
-    padding: 0rem var(--padding-m);
+    padding: 6px 4px;
     flex-shrink: 0;
 }
 
@@ -16,8 +16,28 @@
     display: flex;
     align-items: center;
     gap: .5rem;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: 700;
+    cursor: pointer;
+    padding: var(--padding-s) var(--padding-m);
+    line-height: 1;
+    border-radius: .4rem;
+    user-select: none;
+    transition: all .1s ease-out;
+}
+
+.icon svg {
+    font-size: 1.6rem;
+}
+
+.icon:hover {
+    background-color: var(--blue-light-2);
+    transform: translateY(-1px)
+}
+
+.icon:active {
+    background-color: var(--blue-light-2);
+    transform: translateY(0px)
 }
 
 .links {
@@ -25,4 +45,22 @@
     gap: 1.5rem;
     font-weight: 400;
     justify-self: flex-start;
+}
+
+.link {
+    padding: var(--padding-s) var(--padding-m);
+    line-height: 1;
+    border-radius: .4rem;
+    user-select: none;
+    transition: all .1s ease-out;
+}
+
+.link:hover {
+    background-color: var(--blue-light-2);
+    transform: translateY(-1px)
+}
+
+.link:active {
+    background-color: var(--blue-light-2);
+    transform: translateY(0px)
 }

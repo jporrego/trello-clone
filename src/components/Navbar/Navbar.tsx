@@ -7,13 +7,17 @@ import styles from "./Navbar.module.css";
 const Navbar = () => {
   return (
     <div className={styles.navbar}>
-      <div className={styles.icon}>
+      <Link to={"/"} className={styles.icon}>
         <FaTrello></FaTrello>
         Trello
-      </div>
+      </Link>
       <div className={styles.links}>
-        <Link to={"/"}>Boards</Link>
-        <Link to={"/login"}>Login</Link>
+        <Link to={"/"} className={styles.link}>
+          Boards
+        </Link>
+        <Link to={"/login"} className={styles.link}>
+          Login
+        </Link>
       </div>
       <ProfileIcon></ProfileIcon>
     </div>

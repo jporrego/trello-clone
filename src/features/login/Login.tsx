@@ -13,7 +13,7 @@ const Login = () => {
 
   useEffect(() => {
     if (user.id !== null) {
-      //navigate("/");
+      navigate("/");
     }
   }, [user]);
 
