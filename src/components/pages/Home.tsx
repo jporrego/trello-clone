@@ -8,6 +8,7 @@ import { selectUser } from "../../features/user/UserSlice";
 const Home = () => {
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
+
   useEffect(() => {
     if (user.id === null) {
       navigate("/login");

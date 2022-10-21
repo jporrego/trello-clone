@@ -7,6 +7,8 @@ import {
   selectBoardsStatus,
 } from "../../features/board/boardsSlice";
 
+import { selectUser } from "../../features/user/UserSlice";
+
 import styles from "./BoardList.module.css";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import BoardCard from "./board_card/BoardCard";
@@ -15,12 +17,13 @@ const BoardList = () => {
   const dispatch = useAppDispatch();
   const boards = useAppSelector(selectAllBoards);
   const boardStatus = useAppSelector(selectBoardsStatus);
+  const user = useAppSelector(selectUser);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (boardStatus === "idle") {
-      dispatch(fetchBoards());
+    if (boardStatus === "idle" && user.id) {
+      dispatch(fetchBoards(user.id));
     }
   }, [boardStatus]);
 

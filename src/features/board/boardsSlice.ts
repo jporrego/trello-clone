@@ -25,14 +25,19 @@ const old_initialState: BoardState = {
   error: "",
 };
 
-export const fetchBoards = createAsyncThunk("boards/fetchBoards", async () => {
-  if (process.env.REACT_APP_API_URL !== undefined) {
-    const response = await fetch(process.env.REACT_APP_API_URL + "api/boards");
-    const data = response.json();
-    return data;
+export const fetchBoards = createAsyncThunk(
+  "boards/fetchBoards",
+  async (userId: string) => {
+    if (process.env.REACT_APP_API_URL !== undefined) {
+      const response = await fetch(
+        process.env.REACT_APP_API_URL + "api/boards/" + userId
+      );
+      const data = response.json();
+      return data;
+    }
+    // The value we return becomes the `fulfilled` action payload
   }
-  // The value we return becomes the `fulfilled` action payload
-});
+);
 
 export const boardsSlice = createSlice({
   name: "boards",

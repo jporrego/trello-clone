@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import { useNavigate } from "react-router-dom";
 
@@ -10,6 +10,12 @@ const Login = () => {
   const navigate = useNavigate();
 
   const user = useAppSelector(selectUser);
+
+  useEffect(() => {
+    if (user.id !== null) {
+      //navigate("/");
+    }
+  }, [user]);
 
   const handleSignIn = async () => {
     try {

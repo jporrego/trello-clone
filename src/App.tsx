@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { MantineProvider, Text } from "@mantine/core";
 import { useAppSelector, useAppDispatch } from "./app/hooks";
 import { setActiveUser } from "./features/user/UserSlice";
+import { fetchBoards } from "./features/board/boardsSlice";
 import { auth, provider } from "./firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import "./App.css";
@@ -30,6 +31,7 @@ function App() {
             picture: currentUser.photoURL,
           })
         );
+        dispatch(fetchBoards(currentUser.uid));
       }
     });
 
