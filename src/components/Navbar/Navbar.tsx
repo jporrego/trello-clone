@@ -1,10 +1,14 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
+import { useAppSelector } from "../../app/hooks";
+import { selectUser } from "../../features/user/UserSlice";
+
 import ProfileIcon from "../profile/ProfileIcon";
 import { FaTrello } from "react-icons/fa";
 import styles from "./Navbar.module.css";
 
 const Navbar = () => {
+  const user = useAppSelector(selectUser);
   return (
     <div className={styles.navbar}>
       <Link to={"/"} className={styles.icon}>
@@ -15,11 +19,13 @@ const Navbar = () => {
         <Link to={"/"} className={styles.link}>
           Boards
         </Link>
-        <Link to={"/login"} className={styles.link}>
-          Login
-        </Link>
+        {!user.id && (
+          <Link to={"/login"} className={styles.link}>
+            Login
+          </Link>
+        )}
       </div>
-      <ProfileIcon></ProfileIcon>
+      {user.id && <ProfileIcon></ProfileIcon>}
     </div>
   );
 };
