@@ -16,14 +16,17 @@ const Navbar = () => {
         Trello
       </Link>
       <div className={styles.links}>
-        <Link to={"/"} className={styles.link}>
-          Boards
-        </Link>
+        {user.id && (
+          <Link to={"/"} className={styles.link}>
+            Boards
+          </Link>
+        )}
+        {/*
         {!user.id && (
           <Link to={"/login"} className={styles.link}>
             Login
           </Link>
-        )}
+        )}*/}
       </div>
       {user.id && <ProfileIcon></ProfileIcon>}
     </div>

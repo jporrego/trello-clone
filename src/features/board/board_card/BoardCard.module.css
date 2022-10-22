@@ -1,9 +1,9 @@
 .boardCard {
     display: flex;
     padding: .5rem 1rem;
-    width: 14rem;
-    height: 9.6rem;
-    border-radius: var(--padding-s);
+    width: 17rem;
+    height: 9rem;
+    border-radius: 3px;
     background-color: var(--grey-dark);
     color: var(--white);
     font-size: 1.6rem;

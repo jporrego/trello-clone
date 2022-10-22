@@ -4,12 +4,13 @@
     gap: var(--padding-m);
     background-color: var(--grey-light);
     padding: var(--padding-xl) var(--padding-m);
+    max-width: 100%;
 }
 
 .boardListTitle {
     display: flex;
     align-items: center;
-    padding-left: 1rem;
+    padding-left: 0rem;
     gap: 1rem;
     font-size: 1.6rem;
     font-weight: 700;
@@ -21,7 +22,6 @@
 }
 
 .boardCards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem 1rem;
+    display: flex;
+    gap: 2rem;
 }

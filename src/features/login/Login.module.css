@@ -33,7 +33,7 @@ h3 {
     color: var(--grey-dark);
 }
 
-button {
+login button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -51,10 +51,10 @@ button {
     cursor: pointer;
 }
 
-button:hover {
+login button:hover {
     background-color: var(--grey-light-2);
 }
 
-button svg {
+login button svg {
     font-size: 1.8rem;
 }

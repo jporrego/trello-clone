@@ -12,6 +12,7 @@ import { selectUser } from "../../features/user/UserSlice";
 import styles from "./BoardList.module.css";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import BoardCard from "./board_card/BoardCard";
+import AddBoard from "./add_board/AddBoard";
 
 const BoardList = () => {
   const dispatch = useAppDispatch();
@@ -34,11 +35,13 @@ const BoardList = () => {
   return (
     <div className={styles.boardList}>
       <div className={styles.boardListTitle}>
-        {" "}
         <MdOutlineDashboardCustomize></MdOutlineDashboardCustomize>Boards
       </div>
 
-      <div className={styles.boardCards}>{renderedBoards}</div>
+      <div className={styles.boardCards}>
+        {renderedBoards}
+        <AddBoard></AddBoard>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,20 @@
+.add_board {
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    padding: 3rem 1rem;
+    width: 17rem;
+    height: 9rem;
+    border-radius: 3px;
+    background-color: var(--grey-light-1);
+    color: var(--grey-darker);
+    font-size: 1.4rem;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+@media (pointer: fine) {
+    .add_board:hover {
+        filter: brightness(.95);
+    }
+}
