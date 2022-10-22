@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Menu, Button, Text, createStyles } from "@mantine/core";
+import React, { useState, useEffect } from "react";
+import { Menu, Button, Text, createStyles, Modal, Group } from "@mantine/core";
 import {
   Settings,
   Search,
@@ -58,49 +58,20 @@ const AddBoardPopover: React.FC<AddBoardPopoverProps> = ({
   };
 
   return (
-    <Menu
-      shadow="md"
-      width={200}
-      classNames={classes}
-      position="bottom-start"
-      opened={opened}
-      onChange={setOpened}
-    >
-      <div className={styles.add_board}>
-        <Menu.Target>
-          <div className={styles.target}>
-            <p>Create new board</p>
-          </div>
-        </Menu.Target>
-        <Menu.Dropdown>
-          <Menu.Label>Account</Menu.Label>
-          <Menu.Divider />
-          <Menu.Item onClick={() => handleSignOut()}>Log out</Menu.Item>
-          {/*
-            <Menu.Item icon={<Settings size={14} />}>Settings</Menu.Item>
-            <Menu.Item icon={<MessageCircle size={14} />}>Messages</Menu.Item>
-            <Menu.Item icon={<Photo size={14} />}>Gallery</Menu.Item>
-            <Menu.Item
-              icon={<Search size={14} />}
-              rightSection={
-                <Text size="xs" color="dimmed">
-                  ⌘K
-                </Text>
-              }
-            >
-              Search
-            </Menu.Item>
-            <Menu.Divider />
-            <Menu.Label>Danger zone</Menu.Label>
-            <Menu.Item icon={<ArrowsLeftRight size={14} />}>
-              Transfer my data
-            </Menu.Item>
-            <Menu.Item color="red" icon={<Trash size={14} />}>
-              Delete my account
-            </Menu.Item>*/}
-        </Menu.Dropdown>
-      </div>
-    </Menu>
+    <>
+      <Modal
+        centered
+        opened={opened}
+        onClose={() => setOpened(false)}
+        title="Create board"
+      >
+        {/* Modal content */}
+      </Modal>
+
+      <Group position="center">
+        <Button onClick={() => setOpened(true)}>Create new board</Button>
+      </Group>
+    </>
   );
 };
 
