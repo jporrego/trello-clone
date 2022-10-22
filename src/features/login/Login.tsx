@@ -5,6 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { auth, provider } from "../../firebase";
 import { setActiveUser, logoutUser, selectUser } from "../user/UserSlice";
 
+import { FaTrello } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import styles from "./Login.module.css";
+
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -39,24 +43,16 @@ const Login = () => {
     } catch (error) {}
   };
 
-  const handleSignOut = async () => {
-    try {
-      await auth.signOut();
-      dispatch(logoutUser());
-      localStorage.removeItem("authToken");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <div>
-      Login{" "}
-      {user.name ? (
-        <button onClick={handleSignOut}>Sign out</button>
-      ) : (
-        <button onClick={() => dispatch(handleSignIn)}>Sign in</button>
-      )}
+    <div className={styles.login}>
+      <div className={styles.login_logo}>
+        <FaTrello></FaTrello>
+        <div>Trello</div>
+      </div>
+      <h3>Log in to Trello</h3>
+      <button onClick={() => dispatch(handleSignIn)}>
+        <FcGoogle></FcGoogle>Continue with Google
+      </button>
     </div>
   );
 };
