@@ -30,32 +30,14 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-interface AddBoardPopoverProps {
+interface AddBoardModalProps {
   setShowListMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const AddBoardPopover: React.FC<AddBoardPopoverProps> = ({
-  setShowListMenu,
-}) => {
+const AddBoardModal: React.FC<AddBoardModalProps> = ({ setShowListMenu }) => {
   const [opened, setOpened] = useState(false);
-  const { classes } = useStyles();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (opened) {
-      setShowListMenu(true);
-    } else {
-      setShowListMenu(false);
-    }
-  }, [opened]);
-
-  const handleSignOut = async () => {
-    try {
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   return (
     <>
@@ -65,7 +47,9 @@ const AddBoardPopover: React.FC<AddBoardPopoverProps> = ({
         onClose={() => setOpened(false)}
         title="Create board"
       >
-        {/* Modal content */}
+        <form action="">
+          <input type="text" />
+        </form>
       </Modal>
 
       <Group position="center">
@@ -75,4 +59,4 @@ const AddBoardPopover: React.FC<AddBoardPopoverProps> = ({
   );
 };
 
-export default AddBoardPopover;
+export default AddBoardModal;
