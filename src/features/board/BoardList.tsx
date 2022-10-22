@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../app/hooks";
 import {
@@ -13,12 +13,14 @@ import styles from "./BoardList.module.css";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
 import BoardCard from "./board_card/BoardCard";
 import AddBoard from "./add_board/AddBoard";
+import AddBoardPopover from "./add_board/AddBoardPopover";
 
 const BoardList = () => {
   const dispatch = useAppDispatch();
   const boards = useAppSelector(selectAllBoards);
   const boardStatus = useAppSelector(selectBoardsStatus);
   const user = useAppSelector(selectUser);
+  const [showListMenu, setShowListMenu] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -40,7 +42,7 @@ const BoardList = () => {
 
       <div className={styles.boardCards}>
         {renderedBoards}
-        <AddBoard></AddBoard>
+        <AddBoardPopover setShowListMenu={setShowListMenu}></AddBoardPopover>
       </div>
     </div>
   );

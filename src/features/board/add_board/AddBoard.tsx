@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./AddBoard.module.css";
+import AddBoardPopover from "./AddBoardPopover";
 
 const AddBoard = () => {
-  return <div className={styles.add_board}>Create new board</div>;
+  const [showListMenu, setShowListMenu] = useState<boolean>(false);
+  return (
+    <div className={styles.add_board}>
+      <AddBoardPopover setShowListMenu={setShowListMenu}></AddBoardPopover>
+    </div>
+  );
 };
 
 export default AddBoard;
