@@ -17,7 +17,7 @@ const BoardCard: React.FC<BoardCardProps> = ({ board }) => {
       className={`${styles.boardCard} transition50ms`}
       onClick={() => {
         navigate(`/boards/${board.id}`);
-        dispatch(boardSelected(board.id));
+        dispatch(boardSelected(board));
       }}
       style={{
         backgroundImage: `url(/img/${board?.bg_img})`,

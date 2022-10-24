@@ -15,7 +15,7 @@ export interface BoardState {
 const boardsAdapter = createEntityAdapter<Board>();
 
 const initialState = boardsAdapter.getInitialState({
-  selectedBoard: "",
+  selectedBoard: {},
   status: "idle",
   error: "",
 });
@@ -79,5 +79,7 @@ export const {
 } = boardsAdapter.getSelectors((state: RootState) => state.boards);
 
 export const selectBoardsStatus = (state: RootState) => state.boards.status;
+export const selectSelectedBoard = (state: RootState) =>
+  state.boards.selectedBoard;
 
 export default boardsSlice.reducer;

@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useParams } from "react-router-dom";
 import { useAppSelector } from "../../app/hooks";
 import { selectUser } from "../../features/user/UserSlice";
+import { selectSelectedBoard } from "../../features/board/boardsSlice";
 
 import ProfileIcon from "../profile/ProfileIcon";
 import { FaTrello } from "react-icons/fa";
@@ -9,8 +10,17 @@ import styles from "./Navbar.module.css";
 
 const Navbar = () => {
   const user = useAppSelector(selectUser);
+  const selectedBoard = useAppSelector(selectSelectedBoard);
   return (
-    <div className={styles.navbar}>
+    <div
+      className={styles.navbar}
+      style={{
+        //@ts-ignore
+        backgroundImage: `url(/img/${selectedBoard?.bg_img})`,
+        //@ts-ignore
+        backgroundColor: selectedBoard?.bg_color,
+      }}
+    >
       <Link to={"/"} className={styles.icon}>
         <FaTrello></FaTrello>
         Trello
