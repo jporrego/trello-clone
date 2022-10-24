@@ -1,8 +1,13 @@
 import React, { useState } from "react";
 import { BackgroundSelector } from "./BackgroundSelector";
 import axios from "axios";
-import { useAppSelector } from "../../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { selectUser } from "../../../features/user/UserSlice";
+import {
+  selectAllBoards,
+  fetchBoards,
+  selectBoardsStatus,
+} from "../../../features/board/boardsSlice";
 import styles from "./AddBoard.module.css";
 import { json } from "stream/consumers";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +20,7 @@ const AddBoardForm = () => {
     bgColor: "",
   });
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const onChangeBackground = (img: string, color: string) => {
     if (img.length > 0) {
@@ -35,6 +41,7 @@ const AddBoardForm = () => {
           bgColor: boardData.bgColor,
         };
         const res = await axios.post(url, payload);
+        user.id && (await dispatch(fetchBoards(user.id)));
         navigate("/boards/" + res.data);
       } catch (error) {
         console.log(error);
