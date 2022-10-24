@@ -1,12 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ColorPicker from "./ColorPicker";
 import BoardPreview from "../../../assets/img/board_preview.png";
 import styles from "./AddBoard.module.css";
 import ImgPicker from "./ImgPicker";
 
-export const BackgroundSelector = () => {
+interface BackgroundSelectorProps {
+  onChangeBackground: (img: string, color: string) => void;
+}
+
+export const BackgroundSelector: React.FC<BackgroundSelectorProps> = ({
+  onChangeBackground,
+}) => {
   const [selectedColor, setSelectedColor] = useState<string>("");
   const [selectedImg, setSelectedImg] = useState<string>("bg_castle.jpg");
+
+  useEffect(() => {
+    onChangeBackground(selectedImg, selectedColor);
+  }, [selectedColor, selectedImg]);
 
   const selectBg = (src: string, isImg: boolean) => {
     if (isImg) {
