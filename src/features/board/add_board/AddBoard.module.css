@@ -42,6 +42,13 @@
     }
 }
 
+/* ============ Form ================= */
+
+.add_board_form {
+    margin: 0 auto;
+    width: 30rem;
+}
+
 /* ============ Background Selector ================= */
 
 .background_selector {
@@ -50,7 +57,7 @@
     padding: 1rem;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .preview {
@@ -72,5 +79,33 @@
 /* ============ Selector ================= */
 
 .selector {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     width: 100%;
+}
+
+.selector__colors {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.color_picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    width: 4rem;
+    height: 3.2rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all .1s ease-out;
+}
+
+@media (pointer: fine) {
+    .color_picker:hover {
+        filter: brightness(.9)
+    }
 }

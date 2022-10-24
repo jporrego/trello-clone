@@ -30,6 +30,13 @@
   --padding-xl: 3rem;
   --product-section-max-width: 77rem;
   -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  /* Color selector */
+  --select-blue: #0079BF;
+  --select-yellow: #D29034;
+  --select-green: rgb(81, 152, 57);
+  --select-red: rgb(176, 70, 50);
+  --select-purple: rgb(137, 96, 158);
+  --select-pink: rgb(205, 90, 145);
 }
 
 * {

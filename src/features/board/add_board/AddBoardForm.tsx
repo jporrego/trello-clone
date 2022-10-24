@@ -1,9 +1,10 @@
 import React from "react";
 import { BackgroundSelector } from "./BackgroundSelector";
+import styles from "./AddBoard.module.css";
 
 const AddBoardForm = () => {
   return (
-    <div>
+    <div className={styles.add_board_form}>
       <BackgroundSelector></BackgroundSelector>
       <div>
         Board title
