@@ -8,8 +8,8 @@ export interface User {
 export interface Board {
   id: string;
   title: string;
-  bgImg: string;
-  bgColor: string;
+  bg_img: string;
+  bg_color: string;
 }
 
 export interface List {

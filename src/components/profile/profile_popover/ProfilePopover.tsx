@@ -13,6 +13,7 @@ import { auth, provider } from "../../../firebase";
 import { useAppDispatch } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import { logoutUser } from "../../../features/user/UserSlice";
+import { boardsCleared } from "../../../features/board/boardsSlice";
 
 const useStyles = createStyles((theme) => ({
   item: {
@@ -57,6 +58,7 @@ const ProfilePopover: React.FC<ProfilePopoverProps> = ({
     try {
       await auth.signOut();
       dispatch(logoutUser());
+      dispatch(boardsCleared());
       navigate("/login");
     } catch (error) {
       console.log(error);

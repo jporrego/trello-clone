@@ -43,8 +43,8 @@
     gap: 1rem;
     line-height: 0;
     font-size: 1.4rem;
-    background-color: rgba(255, 255, 255, .15);
-    color: white;
+    background-color: rgba(255, 255, 255, .7);
+    color: var(--black);
     padding: var(--padding-m);
     border-radius: var(--padding-xs);
     cursor: pointer;
@@ -58,11 +58,11 @@
 
 @media (pointer: fine) {
     .showFormBtn:hover {
-        background-color: rgba(255, 255, 255, .2);
+        background-color: rgba(230, 230, 230, .7);
     }
 
     .showFormBtn:active {
-        background-color: rgba(255, 255, 255, .25);
+        background-color: rgba(220, 220, 220, .7);
     }
 
     .addList__btn:hover {

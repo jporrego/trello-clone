@@ -2,10 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(74, 80, 107);
     flex: 1;
     padding: var(--padding-xl) 0;
-
+    background-repeat: noRepeat;
+    background-size: cover;
+    background-position: 0% 20%;
 }
 
 .boardPageTopSection {

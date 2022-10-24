@@ -5,6 +5,7 @@
     background-color: var(--grey-light);
     padding: var(--padding-xl) var(--padding-m);
     max-width: 100%;
+    min-height: 100%;
 }
 
 .boardListTitle {
@@ -23,5 +24,6 @@
 
 .boardCards {
     display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
 }

@@ -4,7 +4,9 @@
     width: 17rem;
     height: 9rem;
     border-radius: 3px;
-    background-color: var(--grey-dark);
+    background-repeat: noRepeat;
+    background-size: cover;
+    background-position: center;
     color: var(--white);
     font-size: 1.6rem;
     font-weight: 600;

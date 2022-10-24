@@ -115,7 +115,13 @@ const Board = () => {
   });
 
   return (
-    <div className={styles.boardPage}>
+    <div
+      className={styles.boardPage}
+      style={{
+        backgroundImage: `url(/img/${board?.bg_img})`,
+        backgroundColor: board?.bg_color,
+      }}
+    >
       <div className={styles.boardPageTopSection}>
         <div className={styles.title}>{board?.title}</div>
       </div>

@@ -15,15 +15,10 @@ export interface BoardState {
 const boardsAdapter = createEntityAdapter<Board>();
 
 const initialState = boardsAdapter.getInitialState({
+  selectedBoard: "",
   status: "idle",
   error: "",
 });
-
-const old_initialState: BoardState = {
-  //boards: [],
-  status: "idle",
-  error: "",
-};
 
 export const fetchBoards = createAsyncThunk(
   "boards/fetchBoards",
@@ -48,6 +43,13 @@ export const boardsSlice = createSlice({
       boardsAdapter.addOne(state, payload);
       console.log(payload);
     },
+    boardSelected: (state, action) => {
+      const payload = action.payload;
+      state.selectedBoard = payload;
+    },
+    boardsCleared: (state) => {
+      boardsAdapter.removeAll(state);
+    },
   },
   extraReducers(builder) {
     builder
@@ -66,7 +68,7 @@ export const boardsSlice = createSlice({
   },
 });
 
-export const { cardAdded } = boardsSlice.actions;
+export const { cardAdded, boardsCleared, boardSelected } = boardsSlice.actions;
 
 // Export the customized selectors for this adapter using `getSelectors`
 export const {
