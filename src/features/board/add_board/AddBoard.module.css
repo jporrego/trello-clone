@@ -85,10 +85,25 @@
     width: 100%;
 }
 
-.selector__colors {
+.selector__section {
     display: flex;
     justify-content: space-between;
 
+}
+
+.img_picker {
+    width: 6.4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: all .1s ease-out;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .color_picker {
@@ -105,7 +120,7 @@
 }
 
 @media (pointer: fine) {
-    .color_picker:hover {
+    .color_picker:hover, .img_picker:hover {
         filter: brightness(.9)
     }
 }

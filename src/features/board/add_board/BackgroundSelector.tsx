@@ -5,8 +5,8 @@ import styles from "./AddBoard.module.css";
 import ImgPicker from "./ImgPicker";
 
 export const BackgroundSelector = () => {
-  const [selectedColor, setSelectedColor] = useState<string>("#0079BF");
-  const [selectedImg, setSelectedImg] = useState<string>("");
+  const [selectedColor, setSelectedColor] = useState<string>("");
+  const [selectedImg, setSelectedImg] = useState<string>("bg_castle.jpg");
 
   const selectBg = (src: string, isImg: boolean) => {
     if (isImg) {
@@ -19,34 +19,42 @@ export const BackgroundSelector = () => {
   };
   return (
     <div className={styles.background_selector}>
-      <div className={styles.preview}>
+      <div
+        className={styles.preview}
+        style={{
+          backgroundImage: `url(img/${selectedImg})`,
+          backgroundColor: selectedColor,
+          backgroundRepeat: "noRepeat",
+          backgroundSize: "cover",
+        }}
+      >
         <img src={BoardPreview} alt="" />
       </div>
       <div className={styles.selector}>
         <h5>Background</h5>
-        <div className={styles.selector__img}>
+        <div className={styles.selector__section}>
           <ImgPicker
-            img={"bg_castle"}
-            selectedImg={selectedColor}
-            selectBg={setSelectedColor}
+            img={"bg_castle.jpg"}
+            selectedImg={selectedImg}
+            selectBg={selectBg}
           ></ImgPicker>
           <ImgPicker
-            img={"bg_mountain"}
-            selectedImg={selectedColor}
-            selectBg={setSelectedColor}
+            img={"bg_mountain.jpg"}
+            selectedImg={selectedImg}
+            selectBg={selectBg}
           ></ImgPicker>
           <ImgPicker
-            img={"#bg_purple"}
-            selectedImg={selectedColor}
-            selectBg={setSelectedColor}
+            img={"bg_purple.jpg"}
+            selectedImg={selectedImg}
+            selectBg={selectBg}
           ></ImgPicker>
           <ImgPicker
-            img={"#bg_sand"}
-            selectedImg={selectedColor}
-            selectBg={setSelectedColor}
+            img={"bg_sand.jpg"}
+            selectedImg={selectedImg}
+            selectBg={selectBg}
           ></ImgPicker>
         </div>
-        <div className={styles.selector__colors}>
+        <div className={styles.selector__section}>
           <ColorPicker
             color={"#0079BF"}
             selectedColor={selectedColor}

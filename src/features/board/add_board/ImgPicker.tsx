@@ -13,9 +13,13 @@ const ImgPicker: React.FC<ImgPickerProps> = ({
   selectedImg,
   selectBg,
 }) => {
+  const imgUrl = "img/" + img;
   return (
-    <div className={styles.img_picker} onClick={() => selectBg(img, true)}>
-      <img src={img} alt="" />
+    <div
+      className={styles.img_picker}
+      style={{ backgroundImage: `url(${imgUrl})` }}
+      onClick={() => selectBg(img, true)}
+    >
       {img === selectedImg && <BsCheckLg></BsCheckLg>}
     </div>
   );
