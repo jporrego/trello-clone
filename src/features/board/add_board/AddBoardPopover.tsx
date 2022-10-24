@@ -12,6 +12,7 @@ import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { useAppDispatch } from "../../../app/hooks";
 import { useNavigate } from "react-router-dom";
 import styles from "./AddBoard.module.css";
+import AddBoardForm from "./AddBoardForm";
 
 const useStyles = createStyles((theme) => ({
   item: {
@@ -47,9 +48,7 @@ const AddBoardModal: React.FC<AddBoardModalProps> = ({ setShowListMenu }) => {
         onClose={() => setOpened(false)}
         title="Create board"
       >
-        <form action="">
-          <input type="text" />
-        </form>
+        <AddBoardForm></AddBoardForm>
       </Modal>
 
       <Group position="center">
