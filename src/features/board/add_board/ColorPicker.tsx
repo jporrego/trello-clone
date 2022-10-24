@@ -5,19 +5,19 @@ import styles from "./AddBoard.module.css";
 interface ColorPickerProps {
   color: string;
   selectedColor: string;
-  setSelectedColor: (color: string) => void;
+  selectBg: (src: string, isImg: boolean) => void;
 }
 
 const ColorPicker: React.FC<ColorPickerProps> = ({
   color,
-  setSelectedColor,
   selectedColor,
+  selectBg,
 }) => {
   return (
     <div
       style={{ backgroundColor: color }}
       className={styles.color_picker}
-      onClick={() => setSelectedColor(color)}
+      onClick={() => selectBg(color, false)}
     >
       {color === selectedColor && <BsCheckLg></BsCheckLg>}
     </div>
