@@ -7,7 +7,9 @@ export interface User {
 
 export interface Board {
   id: string;
-  name: string;
+  title: string;
+  bgImg: string;
+  bgColor: string;
 }
 
 export interface List {

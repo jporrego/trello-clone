@@ -14,7 +14,7 @@ const BoardCard: React.FC<BoardCardProps> = ({ board }) => {
       className={`${styles.boardCard} transition50ms`}
       onClick={() => navigate(`/boards/${board.id}`)}
     >
-      <div>{board.name}</div>
+      <div>{board.title}</div>
     </div>
   );
 };

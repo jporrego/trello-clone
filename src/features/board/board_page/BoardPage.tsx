@@ -117,7 +117,7 @@ const Board = () => {
   return (
     <div className={styles.boardPage}>
       <div className={styles.boardPageTopSection}>
-        <div className={styles.title}>{board?.name}</div>
+        <div className={styles.title}>{board?.title}</div>
       </div>
 
       <div className={styles.lists}>

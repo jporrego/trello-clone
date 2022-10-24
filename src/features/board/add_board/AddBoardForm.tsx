@@ -4,6 +4,8 @@ import axios from "axios";
 import { useAppSelector } from "../../../app/hooks";
 import { selectUser } from "../../../features/user/UserSlice";
 import styles from "./AddBoard.module.css";
+import { json } from "stream/consumers";
+import { useNavigate } from "react-router-dom";
 
 const AddBoardForm = () => {
   const user = useAppSelector(selectUser);
@@ -12,6 +14,7 @@ const AddBoardForm = () => {
     bgImg: "",
     bgColor: "",
   });
+  const navigate = useNavigate();
 
   const onChangeBackground = (img: string, color: string) => {
     if (img.length > 0) {
@@ -25,14 +28,14 @@ const AddBoardForm = () => {
     if (boardData.title.trim().length > 0) {
       try {
         const url = process.env.REACT_APP_API_URL + `api/boards/`;
-        const data = {
+        const payload = {
           userId: user.id,
           title: boardData.title,
           bgImg: boardData.bgImg,
           bgColor: boardData.bgColor,
         };
-        const res = await axios.post(url, data);
-        console.log(res);
+        const res = await axios.post(url, payload);
+        navigate("/boards/" + res.data);
       } catch (error) {
         console.log(error);
       }
