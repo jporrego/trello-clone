@@ -75,7 +75,7 @@ const ProfilePopover: React.FC<ProfilePopoverProps> = ({
       onChange={setOpened}
     >
       <Menu.Target>
-        <img src={img} alt="" />
+        <img src={img} alt="pfp" />
       </Menu.Target>
 
       <Menu.Dropdown>

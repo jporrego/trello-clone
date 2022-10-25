@@ -12,15 +12,7 @@ const Navbar = () => {
   const user = useAppSelector(selectUser);
   const selectedBoard = useAppSelector(selectSelectedBoard);
   return (
-    <div
-      className={styles.navbar}
-      style={{
-        //@ts-ignore
-        backgroundImage: `url(/img/${selectedBoard?.bg_img})`,
-        //@ts-ignore
-        backgroundColor: selectedBoard?.bg_color,
-      }}
-    >
+    <div className={styles.navbar}>
       <Link to={"/"} className={styles.icon}>
         <FaTrello></FaTrello>
         Trello
@@ -31,14 +23,19 @@ const Navbar = () => {
             Boards
           </Link>
         )}
-        {/*
-        {!user.id && (
-          <Link to={"/login"} className={styles.link}>
-            Login
-          </Link>
-        )}*/}
       </div>
       {user.id && <ProfileIcon></ProfileIcon>}
+
+      {/* <div
+        className={styles.navbar_wrapper}
+        style={{
+          backgroundColor: "blue",
+          //@ts-ignore
+          backgroundImage: `url(/img/${selectedBoard?.bg_img})`,
+          //@ts-ignore
+          backgroundColor: selectedBoard?.bg_color,
+        }}
+      ></div> */}
     </div>
   );
 };

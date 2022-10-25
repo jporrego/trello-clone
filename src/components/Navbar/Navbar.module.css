@@ -1,16 +1,28 @@
 .navbar {
-    background-color: var(--blue);
+    position: relative;
     color: var(--white);
     height: 4rem;
+    width: 100vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 3rem;
     font-size: 1.4rem;
     font-weight: 300;
-    padding: 6px 4px;
     flex-shrink: 0;
-    backdrop-filter: brightness(.8);
+    background-color: var(--blue);
+    padding: 0 .5rem;
+
+}
+
+.navbar_wrapper {
+    background-color: var(--blue);
+    position: absolute;
+    height: 100%;
+    width: 100vw;
+    z-index: -1;
+    filter: blur(.4rem) brightness(.8);
+    transform: scale(1.5)
 }
 
 .icon {
