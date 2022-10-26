@@ -12,9 +12,9 @@
 
 .card {
     display: grid;
-    grid-template-columns: 80% 1fr;
+    grid-template-columns: 70% 1fr;
     grid-template-rows: 1fr;
-    gap: var(--padding-m);
+    gap: var(--padding-l);
     background-color: var(--grey-light-2);
     max-width: 70rem;
     flex: 1;
@@ -74,7 +74,12 @@
     font-weight: 600;
 }
 
-.card__menu {}
+.card__menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
 
 .card__menu__btn {
     display: flex;
@@ -90,6 +95,11 @@
     user-select: none;
     cursor: pointer;
     transition: all .1s ease-out;
+    width: 100%;
+}
+
+.card__menu__btn__delete {
+    margin-top: auto;
 }
 
 @media (pointer: fine) {

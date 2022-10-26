@@ -3,11 +3,12 @@ import axios from "axios";
 import { Card } from "../../../types";
 import { List } from "../../../types";
 import { BiBookContent } from "react-icons/bi";
-import { MdDelete } from "react-icons/md";
+import { MdCheckBox, MdChecklist, MdDelete } from "react-icons/md";
 import { MdOutlineDescription } from "react-icons/md";
 
 import styles from "./CardModal.module.css";
 import Description from "../../../components/card_modal/description/Description";
+import ChecklistBtn from "../../../components/card_modal/checklist/ChecklistBtn";
 
 interface CardModal {
   card?: Card;
@@ -79,8 +80,11 @@ const CardModal: React.FC<CardModal> = ({
 
         {/* MENU */}
         <div className={styles.card__menu}>
+          {/* ---- Checklist ---- */}
+          <ChecklistBtn></ChecklistBtn>
+          {/* ---- Delete ---- */}
           <div
-            className={styles.card__menu__btn}
+            className={`${styles.card__menu__btn} ${styles.card__menu__btn__delete}`}
             onClick={() => handleDeleteCard()}
           >
             <MdDelete></MdDelete> delete
