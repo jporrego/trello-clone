@@ -10,9 +10,16 @@
     font-size: 1.4rem;
     font-weight: 300;
     flex-shrink: 0;
-    background-color: var(--blue);
     padding: 0 .5rem;
 
+}
+
+.navbar_blue {
+    background-color: var(--blue);
+}
+
+.navbar_transparent {
+    background-color: var(--grey-darker);
 }
 
 .navbar_wrapper {

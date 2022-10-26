@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Menu, Button, Text, createStyles } from "@mantine/core";
 import {
   Settings,
@@ -75,7 +75,7 @@ const ProfilePopover: React.FC<ProfilePopoverProps> = ({
       onChange={setOpened}
     >
       <Menu.Target>
-        <img src={img} alt="pfp" />
+        <img src={img} alt="Profile" />
       </Menu.Target>
 
       <Menu.Dropdown>

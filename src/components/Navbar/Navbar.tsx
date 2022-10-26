@@ -11,8 +11,14 @@ import styles from "./Navbar.module.css";
 const Navbar = () => {
   const user = useAppSelector(selectUser);
   const selectedBoard = useAppSelector(selectSelectedBoard);
+
   return (
-    <div className={styles.navbar}>
+    <div
+      className={`
+      ${styles.navbar} 
+      ${selectedBoard ? styles.navbar_transparent : styles.navbar_blue}
+      `}
+    >
       <Link to={"/"} className={styles.icon}>
         <FaTrello></FaTrello>
         Trello
